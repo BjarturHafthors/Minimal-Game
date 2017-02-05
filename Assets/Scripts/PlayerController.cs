@@ -7,10 +7,12 @@ public class PlayerController : MonoBehaviour {
     public float speed;
     public float RotateSpeed;
     private Vector2 moveDirection;
+    public int score;
 
 	// Use this for initialization
 	void Start () {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
+        score = 0;
     }
 
     // Update is called once per frame

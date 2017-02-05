@@ -11,6 +11,11 @@ public class OrbController : MonoBehaviour {
     private float yOrigin;
     private int lastFLoatDirection;
 
+    OrbController(int value)
+    {
+        this.value = value;
+    }
+
 	// Use this for initialization
 	void Start ()
     {

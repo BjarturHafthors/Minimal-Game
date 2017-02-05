@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb2d;
     public float speed;
     public float RotateSpeed;
-    private Vector2 moveDirection;
     public int score;
 
 	// Use this for initialization

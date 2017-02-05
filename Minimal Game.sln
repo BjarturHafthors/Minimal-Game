@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minimal Game", "Minimal Game.csproj", "{736A7ED2-3A95-C540-37F4-36DA73391821}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minimal Game.Editor", "Minimal Game.Editor.csproj", "{D2C9062D-3094-1D92-0410-421403C8A496}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{736A7ED2-3A95-C540-37F4-36DA73391821}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{736A7ED2-3A95-C540-37F4-36DA73391821}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{736A7ED2-3A95-C540-37F4-36DA73391821}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{736A7ED2-3A95-C540-37F4-36DA73391821}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2C9062D-3094-1D92-0410-421403C8A496}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2C9062D-3094-1D92-0410-421403C8A496}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2C9062D-3094-1D92-0410-421403C8A496}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2C9062D-3094-1D92-0410-421403C8A496}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

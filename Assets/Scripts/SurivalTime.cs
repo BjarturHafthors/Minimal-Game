@@ -25,4 +25,9 @@ public class SurivalTime : MonoBehaviour {
     {
         return timeSurvived;
     }
+
+    public void resetTime()
+    {
+        timeSurvived = 0;
+    }
 }

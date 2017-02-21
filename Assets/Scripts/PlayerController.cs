@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb2d;
@@ -73,7 +74,14 @@ public class PlayerController : MonoBehaviour {
     {
         if (other.gameObject.GetComponent<BulletController>() is BulletController && Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() +0.1f)
         {
-            score--;
+            if (score-1 < 0)
+            {
+                SceneManager.LoadScene(2);
+            }
+            else
+            {
+                score--;
+            }
         }
     }
 }

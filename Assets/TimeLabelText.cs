@@ -40,6 +40,8 @@ public class TimeLabelText : MonoBehaviour {
                 gameObject.GetComponent<Text>().text = "You survived for " + Mathf.Floor(time % 60) + " second!";
             }
         }
-        
-	}
+
+        GameObject.Find("SurvivalTime").GetComponent<SurivalTime>().resetTime();
+
+    }
 }

@@ -12,16 +12,17 @@ public class EnemyController : MonoBehaviour {
     public GameObject bullet;
     private float bulletSpawnOffset;
     public float leastPossibleDistanceToPlayer;
-    private float health;
+    public float health;
     public GameObject orb;
-    protected GameObject game;
+    public GameObject game;
+    private float initialHealth;
 
     // Use this for initialization
     public virtual void Start () {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         timeOfLastShot = Time.time - shootCooldown;
         bulletSpawnOffset = 1;
-        health = 5;
+        initialHealth = health;
     }
 
     // Update is called once per frame
@@ -81,6 +82,25 @@ public class EnemyController : MonoBehaviour {
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
+    protected void rotateAwayFromPlayer()
+    {
+        Vector3 direction = player.transform.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    protected void moveAwayFromPlayer()
+    {
+        if (isOnScreen())
+        {
+            rb2d.velocity = new Vector2(transform.up.x, transform.up.y) * speed;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     protected void rotateTowardsNearestOrb(GameObject orb)
     {
         Vector3 direction = orb.transform.position - transform.position;
@@ -100,9 +120,9 @@ public class EnemyController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<BulletController>() is BulletController && (other.GetComponent<BulletController>().getParent() != gameObject || Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() + 0.1f))
+        if (other.tag == "Bullet" && (other.GetComponent<BulletController>().getParent() != gameObject || Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() + 0.1f))
         {
-            if (health - 5 <= 0)
+            if (health - 1 <= 0)
             {
                 GameObject spawnedOrb = Instantiate(orb, transform.position, Quaternion.identity);
                 game.GetComponent<GameController>().orbs.AddLast(spawnedOrb);
@@ -110,7 +130,7 @@ public class EnemyController : MonoBehaviour {
             }
             else
             {
-                health -= 5;
+                health -= 1;
             }
         }
     }
@@ -125,5 +145,10 @@ public class EnemyController : MonoBehaviour {
     public void setGame(GameObject game)
     {
         this.game = game;
+    }
+
+    public float getInitialHealth()
+    {
+        return initialHealth;
     }
 }

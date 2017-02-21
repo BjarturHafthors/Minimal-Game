@@ -12,11 +12,6 @@ public class OrbController : MonoBehaviour {
     private int lastFLoatDirection;
     private float timeOfSpawn;
 
-    OrbController(int value)
-    {
-        this.value = value;
-    }
-
 	// Use this for initialization
 	void Start ()
     {
@@ -61,6 +56,12 @@ public class OrbController : MonoBehaviour {
         {
             other.GetComponent<PlayerController>().health += value;
             other.GetComponent<PlayerController>().game.GetComponent<GameController>().orbs.Remove(gameObject);
+            Destroy(gameObject);
+        }
+        else if (other.tag == "Enemy" && Time.time >= timeOfSpawn + 0.2f)
+        {
+            other.GetComponent<EnemyController>().health += value;
+            other.GetComponent<EnemyController>().game.GetComponent<GameController>().orbs.Remove(gameObject);
             Destroy(gameObject);
         }
     }

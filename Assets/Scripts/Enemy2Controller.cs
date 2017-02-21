@@ -13,17 +13,23 @@ public class Enemy2Controller : EnemyController {
     // Update is called once per frame
     public override void Update()
     {
-        if (game.GetComponent<GameController>().orbs.Count == 0)
+        if (game.GetComponent<GameController>().orbs.Count == 0 && health <= getInitialHealth())
         {
             base.Update();
         }
-        else
+        else if (health <= getInitialHealth())
         {
             GameObject nearest = findNearestOrb();
 
             rotateTowardsNearestOrb(nearest);
 
             moveTowardsNearestOrb(nearest);
+        }
+        else
+        {
+            rotateAwayFromPlayer();
+
+            moveAwayFromPlayer();
         }
     }
 }

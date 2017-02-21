@@ -9,6 +9,7 @@ public class BulletController : MonoBehaviour
     public float speed;
     public float despawnTime;
     private float timeOfSpawn;
+    private GameObject parent;
 
     // Use this for initialization
     void Start()
@@ -70,5 +71,15 @@ public class BulletController : MonoBehaviour
     public float getTimeOfSpawn()
     {
         return timeOfSpawn;
+    }
+
+    public void setParent(GameObject parent)
+    {
+        this.parent = parent;
+    }
+
+    public GameObject getParent()
+    {
+        return parent;
     }
 }

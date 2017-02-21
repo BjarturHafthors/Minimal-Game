@@ -45,17 +45,21 @@ public class EnemyController : MonoBehaviour {
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg -90 ;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        // Shoot
-        if (timeOfLastShot + shootCooldown <= Time.time)
+        if (isOnScreen())
         {
-            Instantiate(bullet, transform.position + transform.forward * bulletSpawnOffset, transform.rotation);
-            timeOfLastShot = Time.time;
+            // Shoot
+            if (timeOfLastShot + shootCooldown <= Time.time)
+            {
+                GameObject shotBullet = Instantiate(bullet, transform.position + transform.forward * bulletSpawnOffset, transform.rotation);
+                shotBullet.GetComponent<BulletController>().setParent(gameObject);
+                timeOfLastShot = Time.time;
+            }
         }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<BulletController>() is BulletController && Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() + 0.1f)
+        if (other.gameObject.GetComponent<BulletController>() is BulletController && (other.GetComponent<BulletController>().getParent() != gameObject || Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() + 0.1f))
         {
             if (health - 5 <= 0)
             {
@@ -67,5 +71,12 @@ public class EnemyController : MonoBehaviour {
                 health -= 5;
             }
         }
+    }
+
+    bool isOnScreen()
+    {
+        Vector3 stageDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+
+        return !(transform.position.x > stageDimensions.x || transform.position.x < -stageDimensions.x || transform.position.y > stageDimensions.y || transform.position.y < -stageDimensions.y);
     }
 }

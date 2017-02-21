@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
 	void Start () {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-        health = 0;
         timeOfLastShot = Time.time - shootCooldown;
         bulletSpawnOffset = 1;
     }
@@ -35,7 +34,8 @@ public class PlayerController : MonoBehaviour {
         // Shoot
         if (Input.GetKey(KeyCode.Space) && timeOfLastShot + shootCooldown <= Time.time)
         {
-            Instantiate(bullet, transform.position + transform.forward*bulletSpawnOffset, transform.rotation);
+            GameObject shotBullet = Instantiate(bullet, transform.position + transform.forward*bulletSpawnOffset, transform.rotation);
+            shotBullet.GetComponent<BulletController>().setParent(gameObject);
             timeOfLastShot = Time.time;
         }
 
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<BulletController>() is BulletController && Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() +0.1f)
+        if (other.gameObject.GetComponent<BulletController>() is BulletController && (other.GetComponent<BulletController>().getParent() != gameObject || Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() + 0.1f))
         {
             if (health-1 < 0)
             {

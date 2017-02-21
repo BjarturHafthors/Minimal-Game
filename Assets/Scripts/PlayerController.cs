@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour {
             Instantiate(bullet, transform.position + transform.forward*bulletSpawnOffset, transform.rotation);
             timeOfLastShot = Time.time;
         }
+
+        checkIfOffscreen();
     }
 
     // Update is called once per frame right before physics happen
@@ -42,5 +44,28 @@ public class PlayerController : MonoBehaviour {
         float move = Input.GetAxis("Vertical");
 
         rb2d.velocity = new Vector2(transform.up.x, transform.up.y) * speed * move;
+    }
+
+    void checkIfOffscreen()
+    {
+        Vector3 stageDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+
+        if (transform.position.x > stageDimensions.x)
+        {
+            transform.position = new Vector3(-stageDimensions.x, transform.position.y, transform.position.z);
+        }
+        else if (transform.position.x < -stageDimensions.x)
+        {
+            transform.position = new Vector3(stageDimensions.x, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.y > stageDimensions.y)
+        {
+            transform.position = new Vector3(transform.position.x, -stageDimensions.y, transform.position.z);
+        }
+        else if (transform.position.y < -stageDimensions.y)
+        {
+            transform.position = new Vector3(transform.position.x, stageDimensions.y, transform.position.z);
+        }
     }
 }

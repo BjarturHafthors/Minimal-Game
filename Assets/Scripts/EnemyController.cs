@@ -28,13 +28,19 @@ public class EnemyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 direction = player.transform.position - transform.position;
-        if (Mathf.Abs(direction.x) > leastPossibleDistanceToPlayer || Mathf.Abs(direction.y) > leastPossibleDistanceToPlayer)
+
+        Vector3 distance = player.transform.position - transform.position;
+        if (Mathf.Sqrt(Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2)) > leastPossibleDistanceToPlayer)
         {
             // Move
             rb2d.velocity = new Vector2(transform.up.x, transform.up.y) * speed;
         }
+        else
+        {
+            rb2d.velocity = new Vector2();
+        }
 
+        Vector3 direction = player.transform.position - transform.position;
         // Rotation
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg -90 ;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);

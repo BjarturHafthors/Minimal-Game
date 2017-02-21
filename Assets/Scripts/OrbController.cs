@@ -10,6 +10,7 @@ public class OrbController : MonoBehaviour {
     private Rigidbody2D rb2d;
     private float yOrigin;
     private int lastFLoatDirection;
+    private float timeOfSpawn;
 
     OrbController(int value)
     {
@@ -22,6 +23,7 @@ public class OrbController : MonoBehaviour {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         yOrigin = gameObject.transform.position.y;
         lastFLoatDirection = -1;
+        timeOfSpawn = Time.time;
     }
 	
 	// Update is called once per frame
@@ -55,9 +57,9 @@ public class OrbController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && Time.time >= timeOfSpawn + 0.2f)
         {
-            other.GetComponent<PlayerController>().score += value;
+            other.GetComponent<PlayerController>().health += value;
             Destroy(gameObject);
         }
     }

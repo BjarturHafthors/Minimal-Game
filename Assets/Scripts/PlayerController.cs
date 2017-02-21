@@ -7,16 +7,17 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb2d;
     public float speed;
     public float RotateSpeed;
-    public int score;
+    public int health;
     private float timeOfLastShot;
     public float shootCooldown;
     public GameObject bullet;
     private float bulletSpawnOffset;
+    public GameObject orb;
     
     // Use this for initialization
 	void Start () {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-        score = 0;
+        health = 0;
         timeOfLastShot = Time.time - shootCooldown;
         bulletSpawnOffset = 1;
     }
@@ -76,13 +77,14 @@ public class PlayerController : MonoBehaviour {
     {
         if (other.gameObject.GetComponent<BulletController>() is BulletController && Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() +0.1f)
         {
-            if (score-1 < 0)
+            if (health-1 < 0)
             {
                 SceneManager.LoadScene(2);
             }
             else
             {
-                score--;
+                health--;
+                Instantiate(orb, transform.position, Quaternion.identity);
             }
         }
     }

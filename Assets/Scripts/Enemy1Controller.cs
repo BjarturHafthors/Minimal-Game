@@ -13,6 +13,14 @@ public class Enemy1Controller : EnemyController {
 	// Update is called once per frame
 	public override void Update ()
     {
-        base.Update();
-	}
+        moveTowardsPlayer();
+
+        rotateTowardsPlayer();
+
+        if (isOnScreen())
+        {
+            shoot();
+
+        }
+    }
 }

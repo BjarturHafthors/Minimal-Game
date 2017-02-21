@@ -26,17 +26,9 @@ public class EnemyController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    public virtual void Update () {
+    public virtual void Update ()
+    {
 
-        moveTowardsPlayer();
-
-        rotateTowardsPlayer();
-
-        if (isOnScreen())
-        {
-            shoot();
-            
-        }
     }
 
     protected void moveTowardsPlayer()

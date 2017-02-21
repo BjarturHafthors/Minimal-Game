@@ -7,11 +7,17 @@ public class PlayerController : MonoBehaviour {
     public float speed;
     public float RotateSpeed;
     public int score;
+    private float timeOfLastShot;
+    public float shootCooldown;
+    public GameObject bullet;
+    private float bulletSpawnOffset;
 
 	// Use this for initialization
 	void Start () {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         score = 0;
+        timeOfLastShot = Time.time - shootCooldown;
+        bulletSpawnOffset = 0.75f;
     }
 
     // Update is called once per frame
@@ -22,6 +28,12 @@ public class PlayerController : MonoBehaviour {
             transform.Rotate(new Vector3(0, 0, 1) * -RotateSpeed * Time.deltaTime);
         else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
             transform.Rotate(new Vector3(0, 0, 1) * RotateSpeed * Time.deltaTime);
+
+        if (Input.GetKey(KeyCode.Space) && timeOfLastShot + shootCooldown <= Time.time)
+        {
+            Instantiate(bullet, transform.position + transform.forward*bulletSpawnOffset, transform.rotation);
+            timeOfLastShot = Time.time;
+        }
     }
 
     // Update is called once per frame right before physics happen

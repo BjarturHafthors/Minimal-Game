@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\Enemy1Controller.cs" />
     <Compile Include="Assets\Scripts\Enemy2Controller.cs" />
+    <Compile Include="Assets\Scripts\Enemy3Controller.cs" />
     <Compile Include="Assets\Scripts\Enemy4Controller.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />

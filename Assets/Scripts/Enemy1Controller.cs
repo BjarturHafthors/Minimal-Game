@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy1Controller : EnemyController {
-
+public class Enemy1Controller : EnemyController
+{
     // Use this for initialization
     public override void Start()
     {

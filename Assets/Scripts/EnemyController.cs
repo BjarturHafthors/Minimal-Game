@@ -5,9 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour {
 
     public float speed;
-    public float RotateSpeed;
     public GameObject player;
-    private bool hasStolenOrb;
     private Rigidbody2D rb2d;
     private float timeOfLastShot;
     public float shootCooldown;
@@ -19,7 +17,6 @@ public class EnemyController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        hasStolenOrb = false;
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         timeOfLastShot = Time.time - shootCooldown;
         bulletSpawnOffset = 1;
@@ -29,31 +26,44 @@ public class EnemyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        move();
+
+        rotate();
+
+        if (isOnScreen())
+        {
+            shoot();
+            
+        }
+    }
+
+    void move()
+    {
         Vector3 distance = player.transform.position - transform.position;
         if (Mathf.Sqrt(Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2)) > leastPossibleDistanceToPlayer)
         {
-            // Move
             rb2d.velocity = new Vector2(transform.up.x, transform.up.y) * speed;
         }
         else
         {
             rb2d.velocity = new Vector2();
         }
+    }
 
+    void rotate()
+    {
         Vector3 direction = player.transform.position - transform.position;
-        // Rotation
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg -90 ;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
 
-        if (isOnScreen())
+    void shoot()
+    {
+        if (timeOfLastShot + shootCooldown <= Time.time)
         {
-            // Shoot
-            if (timeOfLastShot + shootCooldown <= Time.time)
-            {
-                GameObject shotBullet = Instantiate(bullet, transform.position + transform.forward * bulletSpawnOffset, transform.rotation);
-                shotBullet.GetComponent<BulletController>().setParent(gameObject);
-                timeOfLastShot = Time.time;
-            }
+            GameObject shotBullet = Instantiate(bullet, transform.position + transform.forward * bulletSpawnOffset, transform.rotation);
+            shotBullet.GetComponent<BulletController>().setParent(gameObject);
+            timeOfLastShot = Time.time;
         }
     }
 

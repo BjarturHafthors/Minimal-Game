@@ -63,7 +63,7 @@ public class GameController : MonoBehaviour {
             spawnLocation = new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(stageDimensions.y, spawnArea.y), 0);
         }
 
-        int enemyType = Random.Range(1, 3);
+        int enemyType = 4;//Random.Range(1, 3);
 
         GameObject enemyToBeSpawned;
 

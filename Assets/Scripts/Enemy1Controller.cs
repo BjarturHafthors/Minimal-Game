@@ -20,7 +20,6 @@ public class Enemy1Controller : EnemyController {
         if (isOnScreen())
         {
             shoot();
-
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy2Controller : EnemyController {
+public class Enemy4Controller : EnemyController {
 
     // Use this for initialization
     public override void Start()
@@ -13,7 +13,7 @@ public class Enemy2Controller : EnemyController {
     // Update is called once per frame
     public override void Update()
     {
-        if (game.GetComponent<GameController>().orbs.Count == 0 && health <= getInitialHealth())
+        if (game.GetComponent<GameController>().orbs.Count == 0)
         {
             moveTowardsPlayer();
 
@@ -24,19 +24,13 @@ public class Enemy2Controller : EnemyController {
                 shoot();
             }
         }
-        else if (health <= getInitialHealth())
+        else
         {
             GameObject nearest = findNearestOrb();
 
             rotateTowardsNearestOrb(nearest);
 
             moveTowardsNearestOrb(nearest);
-        }
-        else
-        {
-            rotateAwayFromPlayer();
-
-            moveAwayFromPlayer();
         }
     }
 }

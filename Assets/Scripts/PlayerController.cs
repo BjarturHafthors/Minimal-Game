@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour {
     public float shootCooldown;
     public GameObject bullet;
     private float bulletSpawnOffset;
-
-	// Use this for initialization
+    
+    // Use this for initialization
 	void Start () {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         score = 0;

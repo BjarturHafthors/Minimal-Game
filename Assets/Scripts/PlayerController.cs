@@ -25,11 +25,13 @@ public class PlayerController : MonoBehaviour {
 
     void Update()
     {
+        // Rotate
         if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
             transform.Rotate(new Vector3(0, 0, 1) * -RotateSpeed * Time.deltaTime);
         else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
             transform.Rotate(new Vector3(0, 0, 1) * RotateSpeed * Time.deltaTime);
 
+        // Shoot
         if (Input.GetKey(KeyCode.Space) && timeOfLastShot + shootCooldown <= Time.time)
         {
             Instantiate(bullet, transform.position + transform.forward*bulletSpawnOffset, transform.rotation);

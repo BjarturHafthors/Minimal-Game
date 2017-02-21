@@ -38,6 +38,10 @@ public class BulletController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        else if (other.gameObject.GetComponent<EnemyController>() is EnemyController && Time.time > timeOfSpawn + 0.1f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void checkIfOffscreen()

@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         score = 0;
         timeOfLastShot = Time.time - shootCooldown;
-        bulletSpawnOffset = 0.75f;
+        bulletSpawnOffset = 1;
     }
 
     // Update is called once per frame
@@ -66,6 +66,14 @@ public class PlayerController : MonoBehaviour {
         else if (transform.position.y < -stageDimensions.y)
         {
             transform.position = new Vector3(transform.position.x, stageDimensions.y, transform.position.z);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.GetComponent<BulletController>() is BulletController && Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() +0.1f)
+        {
+            score--;
         }
     }
 }

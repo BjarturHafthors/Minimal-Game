@@ -32,9 +32,12 @@ public class BulletController : MonoBehaviour
         rb2d.velocity = new Vector2(transform.up.x, transform.up.y) * speed;
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(gameObject);
+        if (other.gameObject.GetComponent<PlayerController>() is PlayerController && Time.time > timeOfSpawn+0.1f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void checkIfOffscreen()
@@ -58,5 +61,10 @@ public class BulletController : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, stageDimensions.y, transform.position.z);
         }
+    }
+
+    public float getTimeOfSpawn()
+    {
+        return timeOfSpawn;
     }
 }

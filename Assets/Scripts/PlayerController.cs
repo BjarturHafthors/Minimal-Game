@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject bullet;
     private float bulletSpawnOffset;
     public GameObject orb;
+    public GameObject game;
     
     // Use this for initialization
 	void Start () {
@@ -84,7 +85,8 @@ public class PlayerController : MonoBehaviour {
             else
             {
                 health--;
-                Instantiate(orb, transform.position, Quaternion.identity);
+                GameObject spawnedOrb = Instantiate(orb, transform.position, Quaternion.identity);
+                game.GetComponent<GameController>().orbs.AddLast(spawnedOrb);
             }
         }
     }

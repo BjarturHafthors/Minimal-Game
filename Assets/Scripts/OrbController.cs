@@ -60,6 +60,7 @@ public class OrbController : MonoBehaviour {
         if (other.tag == "Player" && Time.time >= timeOfSpawn + 0.2f)
         {
             other.GetComponent<PlayerController>().health += value;
+            other.GetComponent<PlayerController>().game.GetComponent<GameController>().orbs.Remove(gameObject);
             Destroy(gameObject);
         }
     }

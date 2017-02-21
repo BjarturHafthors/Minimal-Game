@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour {
     public GameObject enemy3;
     public GameObject enemy4;
     public GameObject enemy5;
+    public LinkedList<GameObject> orbs;
     public float spawnAreaLength;
 
 
@@ -19,6 +20,7 @@ public class GameController : MonoBehaviour {
     void Start ()
     {
         timeOfLastSpawn = Time.time - spawnCooldown;
+        orbs = new LinkedList<GameObject>();
     }
 	
 	// Update is called once per frame
@@ -61,23 +63,23 @@ public class GameController : MonoBehaviour {
             spawnLocation = new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(stageDimensions.y, spawnArea.y), 0);
         }
 
-        int enemyType = Random.Range(0, 5);
+        int enemyType = 2;//Random.Range(1, 6);
 
         GameObject enemyToBeSpawned;
 
-        if (enemyType == 0)
+        if (enemyType == 1)
         {
             enemyToBeSpawned = enemy1;
         }
-        else if (enemyType == 1)
+        else if (enemyType == 2)
         {
             enemyToBeSpawned = enemy2;
         }
-        else if (enemyType == 2)
+        else if (enemyType == 3)
         {
             enemyToBeSpawned = enemy3;
         }
-        else if (enemyType == 3)
+        else if (enemyType == 4)
         {
             enemyToBeSpawned = enemy4;
         }
@@ -88,5 +90,6 @@ public class GameController : MonoBehaviour {
 
         GameObject spawnedEnemy = Instantiate(enemyToBeSpawned, spawnLocation, Quaternion.identity);
         spawnedEnemy.GetComponent<EnemyController>().player = player;
+        spawnedEnemy.GetComponent<EnemyController>().setGame(gameObject);
     }
 }

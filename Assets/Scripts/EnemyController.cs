@@ -14,21 +14,22 @@ public class EnemyController : MonoBehaviour {
     public float leastPossibleDistanceToPlayer;
     private float health;
     public GameObject orb;
+    protected GameObject game;
 
     // Use this for initialization
-    void Start () {
+    public virtual void Start () {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         timeOfLastShot = Time.time - shootCooldown;
         bulletSpawnOffset = 1;
         health = 5;
     }
-	
-	// Update is called once per frame
-	void Update () {
 
-        move();
+    // Update is called once per frame
+    public virtual void Update () {
 
-        rotate();
+        moveTowardsPlayer();
+
+        rotateTowardsPlayer();
 
         if (isOnScreen())
         {
@@ -37,7 +38,7 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    void move()
+    protected void moveTowardsPlayer()
     {
         Vector3 distance = player.transform.position - transform.position;
         if (Mathf.Sqrt(Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2)) > leastPossibleDistanceToPlayer)
@@ -50,14 +51,44 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    void rotate()
+    protected GameObject findNearestOrb()
+    {
+        GameObject nearestOrb = new GameObject();
+        float nearest = 99999999;
+        foreach (GameObject orb in game.GetComponent<GameController>().orbs)
+        {
+            Vector3 distance = orb.transform.position - transform.position;
+            float dist = Mathf.Sqrt(Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2));
+            if (dist < nearest)
+            {
+                nearest = dist;
+                nearestOrb = orb;
+            }
+        }
+
+        return nearestOrb;
+    }
+
+    protected void moveTowardsNearestOrb(GameObject orb)
+    {
+        rb2d.velocity = new Vector2(transform.up.x, transform.up.y) * speed;
+    }
+
+    protected void rotateTowardsPlayer()
     {
         Vector3 direction = player.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    void shoot()
+    protected void rotateTowardsNearestOrb(GameObject orb)
+    {
+        Vector3 direction = orb.transform.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    protected void shoot()
     {
         if (timeOfLastShot + shootCooldown <= Time.time)
         {
@@ -73,7 +104,8 @@ public class EnemyController : MonoBehaviour {
         {
             if (health - 5 <= 0)
             {
-                Instantiate(orb, transform.position, Quaternion.identity);
+                GameObject spawnedOrb = Instantiate(orb, transform.position, Quaternion.identity);
+                game.GetComponent<GameController>().orbs.AddLast(spawnedOrb);
                 Destroy(gameObject);
             }
             else
@@ -83,10 +115,15 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    bool isOnScreen()
+    protected bool isOnScreen()
     {
         Vector3 stageDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
 
         return !(transform.position.x > stageDimensions.x || transform.position.x < -stageDimensions.x || transform.position.y > stageDimensions.y || transform.position.y < -stageDimensions.y);
+    }
+
+    public void setGame(GameObject game)
+    {
+        this.game = game;
     }
 }

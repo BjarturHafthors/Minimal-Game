@@ -68,16 +68,20 @@ public class EnemyController : MonoBehaviour {
     {
         GameObject nearestEnemy = null;
         float nearest = 99999999;
-        foreach (GameObject enemy in game.GetComponent<GameController>().enemies)
+        for (int i = game.GetComponent<GameController>().enemies.Count-1; i >= 0; i--)
         {
-            if (enemy != self && !enemy.GetComponent<EnemyController>().hasShield)
+            if (game.GetComponent<GameController>().enemies[i] != null)
             {
-                Vector3 distance = enemy.transform.position - transform.position;
-                float dist = Mathf.Sqrt(Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2));
-                if (dist < nearest)
+                GameObject enemy = game.GetComponent<GameController>().enemies[i];
+                if (enemy != self && !enemy.GetComponent<EnemyController>().hasShield)
                 {
-                    nearest = dist;
-                    nearestEnemy = enemy;
+                    Vector3 distance = enemy.transform.position - transform.position;
+                    float dist = Mathf.Sqrt(Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2));
+                    if (dist < nearest)
+                    {
+                        nearest = dist;
+                        nearestEnemy = enemy;
+                    }
                 }
             }
         }
@@ -104,9 +108,16 @@ public class EnemyController : MonoBehaviour {
 
     protected void rotateTowardsNearestEnemy(GameObject enemy)
     {
-        Vector3 direction = enemy.transform.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        //if (enemy != null)
+        {
+            Vector3 direction = enemy.transform.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+       /* else
+        {
+            rotateTowardsPlayer();
+        }*/
     }
 
     protected void rotateAwayFromPlayer()
@@ -157,7 +168,7 @@ public class EnemyController : MonoBehaviour {
             else if (health - 1 <= 0)
             {
                 GameObject spawnedOrb = Instantiate(orb, transform.position, Quaternion.identity);
-                game.GetComponent<GameController>().orbs.AddLast(spawnedOrb);
+                game.GetComponent<GameController>().orbs.Add(spawnedOrb);
                 game.GetComponent<GameController>().enemies.Remove(gameObject);
                 Destroy(gameObject);
             }

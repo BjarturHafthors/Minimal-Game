@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour {
             {
                 health--;
                 GameObject spawnedOrb = Instantiate(orb, transform.position, Quaternion.identity);
-                game.GetComponent<GameController>().orbs.AddLast(spawnedOrb);
+                game.GetComponent<GameController>().orbs.Add(spawnedOrb);
             }
         }
         else if (other.tag == "ShieldProjectile")

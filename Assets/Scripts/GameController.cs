@@ -185,6 +185,7 @@ public class GameController : MonoBehaviour {
         GameObject spawnedEnemy = Instantiate(enemyToBeSpawned, spawnLocation, Quaternion.identity);
         spawnedEnemy.GetComponent<EnemyController>().player = player;
         spawnedEnemy.GetComponent<EnemyController>().setGame(gameObject);
+        spawnedEnemy.GetComponent<EnemyController>().setStrength(playerStrength);
         enemies.Add(spawnedEnemy);
     }
 }

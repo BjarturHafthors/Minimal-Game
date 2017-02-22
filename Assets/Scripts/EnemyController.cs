@@ -17,13 +17,14 @@ public class EnemyController : MonoBehaviour {
     public GameObject game;
     private float initialHealth;
     private bool hasShield;
+    private int strength;
 
-    public Sprite brownOrb;
-    public Sprite pinkOrb;
-    public Sprite greenOrb;
-    public Sprite yellowOrb;
-    public Sprite redOrb;
-    public Sprite whiteOrb;
+    public GameObject brownOrb;
+    public GameObject pinkOrb;
+    public GameObject greenOrb;
+    public GameObject yellowOrb;
+    public GameObject redOrb;
+    public GameObject whiteOrb;
 
     // Use this for initialization
     public virtual void Start () {
@@ -204,5 +205,10 @@ public class EnemyController : MonoBehaviour {
     public float getInitialHealth()
     {
         return initialHealth;
+    }
+
+    public void setStrength(int strength)
+    {
+        this.strength = strength;
     }
 }

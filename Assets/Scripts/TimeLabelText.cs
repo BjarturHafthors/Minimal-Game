@@ -42,6 +42,5 @@ public class TimeLabelText : MonoBehaviour {
         }
 
         GameObject.Find("SurvivalTime").GetComponent<SurivalTime>().resetTime();
-
     }
 }

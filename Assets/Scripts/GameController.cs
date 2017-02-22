@@ -82,8 +82,7 @@ public class GameController : MonoBehaviour {
 
         int enemyType = Random.Range(1, 6);
         int playerStrength = player.GetComponent<PlayerController>().getStrength();
-        int playerHealth = player.GetComponent<PlayerController>().health;
-
+        
         GameObject enemyToBeSpawned;
 
         if (enemyType == 1)

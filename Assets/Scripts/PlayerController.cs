@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour {
     public float shootCooldown;
     public GameObject bullet;
     private float bulletSpawnOffset;
-    public GameObject orb;
     public GameObject game;
     private bool hasShield;
     public Sprite sprite1;
@@ -21,6 +20,13 @@ public class PlayerController : MonoBehaviour {
     public Sprite sprite4;
     private SpriteRenderer spriteRenderer;
     private int strength;
+
+    public GameObject brownOrb;
+    public GameObject pinkOrb;
+    public GameObject greenOrb;
+    public GameObject yellowOrb;
+    public GameObject redOrb;
+    public GameObject whiteOrb;
 
     // Use this for initialization
     void Start () {
@@ -93,15 +99,9 @@ public class PlayerController : MonoBehaviour {
                 hasShield = false;
                 transform.Find("Shield").GetComponent<SpriteRenderer>().enabled = false;
             }
-            else if (health-1 < 0)
-            {
-                SceneManager.LoadScene(2);
-            }
             else
             {
-                health--;
-                GameObject spawnedOrb = Instantiate(orb, transform.position, Quaternion.identity);
-                game.GetComponent<GameController>().orbs.Add(spawnedOrb);
+                spawnOrb(strength);
             }
         }
         else if (other.tag == "ShieldProjectile")
@@ -110,6 +110,39 @@ public class PlayerController : MonoBehaviour {
             transform.Find("Shield").GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
             transform.Find("Shield").GetComponent<SpriteRenderer>().enabled = true;
         }
+    }
+
+    private void spawnOrb(int bulletStrength)
+    {
+        GameObject orb;
+
+        if (strength == 1)
+        {
+            orb = pinkOrb;
+        }
+        else if (strength == 2)
+        {
+            orb = greenOrb;
+        }
+        else if (strength == 3)
+        {
+            orb = yellowOrb;
+        }
+        else
+        {
+            orb = redOrb;
+        }
+
+        if (health - orb.GetComponent<OrbController>().value < 0)
+        {
+            SceneManager.LoadScene(2);
+        }
+        else
+        {
+            health -= orb.GetComponent<OrbController>().value;
+            GameObject spawnedOrb = Instantiate(orb, transform.position, Quaternion.identity);
+            game.GetComponent<GameController>().orbs.Add(spawnedOrb);
+        }   
     }
 
     public void setSprite(int number)

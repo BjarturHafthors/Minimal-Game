@@ -13,7 +13,6 @@ public class EnemyController : MonoBehaviour {
     protected float bulletSpawnOffset;
     public float leastPossibleDistanceToPlayer;
     public float health;
-    public GameObject orb;
     public GameObject game;
     private float initialHealth;
     private bool hasShield;
@@ -27,7 +26,7 @@ public class EnemyController : MonoBehaviour {
     public GameObject whiteOrb;
 
     // Use this for initialization
-    public virtual void Start () {
+    public virtual void Start() {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         timeOfLastShot = Time.time - shootCooldown;
         bulletSpawnOffset = 1;
@@ -36,7 +35,7 @@ public class EnemyController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    public virtual void Update ()
+    public virtual void Update()
     {
 
     }
@@ -80,7 +79,7 @@ public class EnemyController : MonoBehaviour {
     {
         GameObject nearestEnemy = null;
         float nearest = 99999999;
-        for (int i = game.GetComponent<GameController>().enemies.Count-1; i >= 0; i--)
+        for (int i = game.GetComponent<GameController>().enemies.Count - 1; i >= 0; i--)
         {
             if (game.GetComponent<GameController>().enemies[i] != null)
             {
@@ -120,9 +119,9 @@ public class EnemyController : MonoBehaviour {
 
     protected void rotateTowardsNearestEnemy(GameObject enemy)
     {
-            Vector3 direction = enemy.transform.position - transform.position;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        Vector3 direction = enemy.transform.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     protected void rotateAwayFromPlayer()
@@ -172,14 +171,12 @@ public class EnemyController : MonoBehaviour {
             }
             else if (health - 1 <= 0)
             {
-                GameObject spawnedOrb = Instantiate(orb, transform.position, Quaternion.identity);
-                game.GetComponent<GameController>().orbs.Add(spawnedOrb);
-                game.GetComponent<GameController>().enemies.Remove(gameObject);
+                spawnOrb();
                 Destroy(gameObject);
             }
             else
             {
-                health -= 1;
+                health--;
             }
         }
         else if (other.tag == "ShieldProjectile" && (other.GetComponent<BulletController>().getParent() != gameObject || Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() + 0.1f))
@@ -210,5 +207,62 @@ public class EnemyController : MonoBehaviour {
     public void setStrength(int strength)
     {
         this.strength = strength;
+    }
+
+    private void spawnOrb()
+    {
+        int lucky = Random.Range(0, 100);
+
+        GameObject orb;
+
+        if (lucky == 0)
+        {
+            orb = getCorrectOrb(strength + 2);
+        }
+        else
+        {
+            int semiLucky = Random.Range(0, 10);
+
+            if(semiLucky == 0)
+        {
+                orb = getCorrectOrb(strength + 1);
+            }
+            else
+            {
+                orb = getCorrectOrb(strength);
+            }
+        }
+
+        GameObject spawnedOrb = Instantiate(orb, transform.position, Quaternion.identity);
+        game.GetComponent<GameController>().orbs.Add(spawnedOrb);
+        game.GetComponent<GameController>().enemies.Remove(gameObject);
+    }
+
+    private GameObject getCorrectOrb(int strength)
+    {
+        if (strength == 1)
+        {
+            return brownOrb;
+        }
+        else if (strength == 2)
+        {
+            return pinkOrb;
+        }
+        else if (strength == 3)
+        {
+            return greenOrb;
+        }
+        else if (strength == 4)
+        {
+            return yellowOrb;
+        }
+        else if (strength == 5)
+        {
+            return redOrb;
+        }
+        else
+        {
+            return whiteOrb;
+        }
     }
 }

@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour {
     private float initialHealth;
     private bool hasShield;
     private int strength;
+    public bool hasPickedUpOrb;
 
     public GameObject brownOrb;
     public GameObject pinkOrb;
@@ -32,6 +33,7 @@ public class EnemyController : MonoBehaviour {
         bulletSpawnOffset = 1;
         initialHealth = health;
         hasShield = false;
+        hasPickedUpOrb = false;
     }
 
     // Update is called once per frame
@@ -240,6 +242,11 @@ public class EnemyController : MonoBehaviour {
     public void setStrength(int strength)
     {
         this.strength = strength;
+    }
+
+    public int getStrength()
+    {
+        return strength;
     }
 
     private void spawnOrb()

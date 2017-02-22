@@ -63,11 +63,11 @@ public class OrbController : MonoBehaviour {
             {
                 pc.setSprite(1);
             }
-            else if (pc.health > 50 && pc.health <= 500)
+            else if (pc.health > 50 && pc.health <= 350)
             {
                 pc.setSprite(2);
             }
-            else if (pc.health > 500 && pc.health < 5000)
+            else if (pc.health > 350 && pc.health < 2500)
             {
                 pc.setSprite(3);
             }
@@ -80,7 +80,7 @@ public class OrbController : MonoBehaviour {
         }
         else if (other.tag == "Enemy" && Time.time >= timeOfSpawn + 0.1f)
         {
-            other.GetComponent<EnemyController>().health += value;
+            other.GetComponent<EnemyController>().hasPickedUpOrb = true;
             other.GetComponent<EnemyController>().game.GetComponent<GameController>().orbs.Remove(gameObject);
             Destroy(gameObject);
         }

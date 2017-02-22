@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy3Controller : EnemyController
-{
+{  
     // Use this for initialization
     public override void Start()
     {
@@ -19,7 +19,7 @@ public class Enemy3Controller : EnemyController
 
             moveTowardsPlayer();
         }
-        else if (health <= getInitialHealth())
+        else if (!hasPickedUpOrb)
         {
             GameObject mostVal = findNearestMostValuableOrb();
 

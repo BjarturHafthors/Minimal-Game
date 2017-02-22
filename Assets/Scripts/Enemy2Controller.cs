@@ -24,7 +24,7 @@ public class Enemy2Controller : EnemyController
                 shoot();
             }
         }
-        else if (health <= getInitialHealth())
+        else if (!hasPickedUpOrb)
         {
             GameObject nearest = findNearestOrb();
 

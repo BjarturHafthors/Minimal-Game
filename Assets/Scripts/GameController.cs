@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
 
     public float spawnCooldown;
+    private float initialCooldown;
     private float timeOfLastSpawn;
     public GameObject player;
     public List<GameObject> orbs;
@@ -38,6 +39,7 @@ public class GameController : MonoBehaviour {
         timeOfLastSpawn = Time.time - spawnCooldown;
         orbs = new List<GameObject>();
         enemies = new List<GameObject>();
+        initialCooldown = spawnCooldown;
     }
 	
 	// Update is called once per frame
@@ -47,6 +49,15 @@ public class GameController : MonoBehaviour {
         {
             spawnEnemies();
             timeOfLastSpawn = Time.time;
+
+            if (player.GetComponent<PlayerController>().getStrength() == 4)
+            {
+                spawnCooldown -= 0.05f;
+            }
+            else if (spawnCooldown < initialCooldown)
+            {
+                spawnCooldown += 0.05f;
+            }
         }
     }
 

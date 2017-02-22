@@ -18,6 +18,13 @@ public class EnemyController : MonoBehaviour {
     private float initialHealth;
     private bool hasShield;
 
+    public Sprite brownOrb;
+    public Sprite pinkOrb;
+    public Sprite greenOrb;
+    public Sprite yellowOrb;
+    public Sprite redOrb;
+    public Sprite whiteOrb;
+
     // Use this for initialization
     public virtual void Start () {
         rb2d = gameObject.GetComponent<Rigidbody2D>();

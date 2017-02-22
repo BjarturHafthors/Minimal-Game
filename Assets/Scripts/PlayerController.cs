@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
     public Sprite sprite3;
     public Sprite sprite4;
     private SpriteRenderer spriteRenderer;
+    private int strength;
 
     // Use this for initialization
     void Start () {
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour {
         bulletSpawnOffset = 1;
         hasShield = false;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        strength = 1;
     }
 
     // Update is called once per frame
@@ -115,18 +117,27 @@ public class PlayerController : MonoBehaviour {
         if (number == 1)
         {
             spriteRenderer.sprite = sprite1;
+            strength = 1;
         }
         else if (number == 2)
         {
             spriteRenderer.sprite = sprite2;
+            strength = 2;
         }
         else if (number == 3)
         {
             spriteRenderer.sprite = sprite3;
+            strength = 3;
         }
         else
         {
             spriteRenderer.sprite = sprite4;
+            strength = 4;
         }
+    }
+
+    public int getStrength()
+    {
+        return strength;
     }
 }

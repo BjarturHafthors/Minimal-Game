@@ -7,35 +7,30 @@ public class GameController : MonoBehaviour {
     public float spawnCooldown;
     private float timeOfLastSpawn;
     public GameObject player;
-    public GameObject enemy1;
-    public GameObject enemy2;
-    public GameObject enemy3;
-    public GameObject enemy4;
-    public GameObject enemy5;
     public List<GameObject> orbs;
     public List<GameObject> enemies;
     public float spawnAreaLength;
 
-    public Sprite enemy1Orange;
-    public Sprite enemy1Green;
-    public Sprite enemy1Blue;
-    public Sprite enemy1Dark;
-    public Sprite enemy2Orange;
-    public Sprite enemy2Green;
-    public Sprite enemy2Blue;
-    public Sprite enemy2Dark;
-    public Sprite enemy3Orange;
-    public Sprite enemy3Green;
-    public Sprite enemy3Blue;
-    public Sprite enemy3Dark;
-    public Sprite enemy4Orange;
-    public Sprite enemy4Green;
-    public Sprite enemy4Blue;
-    public Sprite enemy4Dark;
-    public Sprite enemy5Orange;
-    public Sprite enemy5Green;
-    public Sprite enemy5Blue;
-    public Sprite enemy5Dark;
+    public GameObject enemy1Orange;
+    public GameObject enemy1Green;
+    public GameObject enemy1Blue;
+    public GameObject enemy1Dark;
+    public GameObject enemy2Orange;
+    public GameObject enemy2Green;
+    public GameObject enemy2Blue;
+    public GameObject enemy2Dark;
+    public GameObject enemy3Orange;
+    public GameObject enemy3Green;
+    public GameObject enemy3Blue;
+    public GameObject enemy3Dark;
+    public GameObject enemy4Orange;
+    public GameObject enemy4Green;
+    public GameObject enemy4Blue;
+    public GameObject enemy4Dark;
+    public GameObject enemy5Orange;
+    public GameObject enemy5Green;
+    public GameObject enemy5Blue;
+    public GameObject enemy5Dark;
 
     // Use this for initialization
     void Start ()
@@ -86,139 +81,110 @@ public class GameController : MonoBehaviour {
         }
 
         int enemyType = Random.Range(1, 6);
-        Sprite enemySprite;
-        int playerStrength;
+        int playerStrength = player.GetComponent<PlayerController>().getStrength();
         int playerHealth = player.GetComponent<PlayerController>().health;
-
-        if (playerHealth <= 50)
-        {
-            playerStrength = 1;
-        }
-        else if (playerHealth > 50 && playerHealth <= 500)
-        {
-            playerStrength = 2;
-        }
-        else if (playerHealth > 500 && playerHealth < 5000)
-        {
-            playerStrength = 3;
-        }
-        else
-        {
-            playerStrength = 4;
-        }
 
         GameObject enemyToBeSpawned;
 
         if (enemyType == 1)
         {
-            enemyToBeSpawned = enemy1;
-
             if (playerStrength == 1)
             {
-                enemySprite = enemy1Green;
+                enemyToBeSpawned = enemy1Green;
             }
             else if (playerStrength == 2)
             {
-                enemySprite = enemy1Blue;
+                enemyToBeSpawned = enemy1Blue;
             }
             else if (playerStrength == 3)
             {
-                enemySprite = enemy1Orange;
+                enemyToBeSpawned = enemy1Orange;
             }
             else
             {
-                enemySprite = enemy1Dark;
+                enemyToBeSpawned = enemy1Dark;
             }
         }
         else if (enemyType == 2)
         {
-            enemyToBeSpawned = enemy2;
-
             if (playerStrength == 1)
             {
-                enemySprite = enemy2Green;
+                enemyToBeSpawned = enemy2Green;
             }
             else if (playerStrength == 2)
             {
-                enemySprite = enemy2Blue;
+                enemyToBeSpawned = enemy2Blue;
             }
             else if (playerStrength == 3)
             {
-                enemySprite = enemy2Orange;
+                enemyToBeSpawned = enemy2Orange;
             }
             else
             {
-                enemySprite = enemy2Dark;
+                enemyToBeSpawned = enemy2Dark;
             }
         }
         else if (enemyType == 3)
         {
-            enemyToBeSpawned = enemy3;
-
             if (playerStrength == 1)
             {
-                enemySprite = enemy3Green;
+                enemyToBeSpawned = enemy3Green;
             }
             else if (playerStrength == 2)
             {
-                enemySprite = enemy3Blue;
+                enemyToBeSpawned = enemy3Blue;
             }
             else if (playerStrength == 3)
             {
-                enemySprite = enemy3Orange;
+                enemyToBeSpawned = enemy3Orange;
             }
             else
             {
-                enemySprite = enemy3Dark;
+                enemyToBeSpawned = enemy3Dark;
             }
         }
         else if (enemyType == 4)
         {
-            enemyToBeSpawned = enemy4;
-
             if (playerStrength == 1)
             {
-                enemySprite = enemy4Green;
+                enemyToBeSpawned = enemy4Green;
             }
             else if (playerStrength == 2)
             {
-                enemySprite = enemy4Blue;
+                enemyToBeSpawned = enemy4Blue;
             }
             else if (playerStrength == 3)
             {
-                enemySprite = enemy4Orange;
+                enemyToBeSpawned = enemy4Orange;
             }
             else
             {
-                enemySprite = enemy4Dark;
+                enemyToBeSpawned = enemy4Dark;
             }
         }
         else 
         {
-            enemyToBeSpawned = enemy5;
-
             if (playerStrength == 1)
             {
-                enemySprite = enemy5Green;
+                enemyToBeSpawned = enemy5Green;
             }
             else if (playerStrength == 2)
             {
-                enemySprite = enemy5Blue;
+                enemyToBeSpawned = enemy5Blue;
             }
             else if (playerStrength == 3)
             {
-                enemySprite = enemy5Orange;
+                enemyToBeSpawned = enemy5Orange;
             }
             else
             {
-                enemySprite = enemy5Dark;
+                enemyToBeSpawned = enemy5Dark;
             }
         }
 
         GameObject spawnedEnemy = Instantiate(enemyToBeSpawned, spawnLocation, Quaternion.identity);
         spawnedEnemy.GetComponent<EnemyController>().player = player;
         spawnedEnemy.GetComponent<EnemyController>().setGame(gameObject);
-        spawnedEnemy.GetComponent<SpriteRenderer>().sprite = enemySprite;
         enemies.Add(spawnedEnemy);
     }
 }

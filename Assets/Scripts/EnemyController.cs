@@ -75,6 +75,39 @@ public class EnemyController : MonoBehaviour {
         return nearestOrb;
     }
 
+    protected GameObject findNearestMostValuableOrb()
+    {
+        GameObject bestOrb = null;
+        float nearest = 99999999;
+        float bestValue = 0;
+        for (int i = game.GetComponent<GameController>().orbs.Count - 1; i >= 0; i--)
+        {
+            if (game.GetComponent<GameController>().orbs[i] != null)
+            {
+                GameObject orb = game.GetComponent<GameController>().orbs[i];
+                Vector3 distance = orb.transform.position - transform.position;
+                float dist = Mathf.Sqrt(Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2));
+
+                if (bestValue < orb.GetComponent<OrbController>().value)
+                {
+                    bestOrb = orb;
+                    bestValue = orb.GetComponent<OrbController>().value;
+                    nearest = dist;
+                }
+                else if (bestValue == orb.GetComponent<OrbController>().value)
+                {
+                    if (dist < nearest)
+                    {
+                        nearest = dist;
+                        bestOrb = orb;
+                    }
+                }
+            }
+        }
+
+        return bestOrb;
+    }
+
     protected GameObject findNearestEnemy(GameObject self)
     {
         GameObject nearestEnemy = null;

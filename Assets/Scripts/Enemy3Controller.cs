@@ -21,15 +21,15 @@ public class Enemy3Controller : EnemyController
         }
         else if (health <= getInitialHealth())
         {
-            GameObject nearest = findNearestOrb();
+            GameObject mostVal = findNearestMostValuableOrb();
 
-            if (nearest == null)
+            if (mostVal == null)
             {
                 // Do nothing
             }
             else
             {
-                rotateTowardsNearestOrb(nearest);
+                rotateTowardsNearestOrb(mostVal);
 
                 moveTowardsNearestOrb();
             }

@@ -15,9 +15,9 @@ public class Enemy2Controller : EnemyController
     {
         if (game.GetComponent<GameController>().orbs.Count == 0 && health <= getInitialHealth())
         {
-            moveTowardsPlayer();
-
             rotateTowardsPlayer();
+
+            moveTowardsPlayer();
 
             if (isOnScreen())
             {
@@ -30,7 +30,7 @@ public class Enemy2Controller : EnemyController
 
             rotateTowardsNearestOrb(nearest);
 
-            moveTowardsNearestOrb(nearest);
+            moveTowardsNearestOrb();
         }
         else
         {

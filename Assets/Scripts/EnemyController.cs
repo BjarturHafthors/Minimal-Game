@@ -7,15 +7,16 @@ public class EnemyController : MonoBehaviour {
     public float speed;
     public GameObject player;
     private Rigidbody2D rb2d;
-    private float timeOfLastShot;
+    protected float timeOfLastShot;
     public float shootCooldown;
     public GameObject bullet;
-    private float bulletSpawnOffset;
+    protected float bulletSpawnOffset;
     public float leastPossibleDistanceToPlayer;
     public float health;
     public GameObject orb;
     public GameObject game;
     private float initialHealth;
+    private bool hasShield;
 
     // Use this for initialization
     public virtual void Start () {
@@ -23,6 +24,7 @@ public class EnemyController : MonoBehaviour {
         timeOfLastShot = Time.time - shootCooldown;
         bulletSpawnOffset = 1;
         initialHealth = health;
+        hasShield = false;
     }
 
     // Update is called once per frame
@@ -62,7 +64,33 @@ public class EnemyController : MonoBehaviour {
         return nearestOrb;
     }
 
-    protected void moveTowardsNearestOrb(GameObject orb)
+    protected GameObject findNearestEnemy(GameObject self)
+    {
+        GameObject nearestEnemy = null;
+        float nearest = 99999999;
+        foreach (GameObject enemy in game.GetComponent<GameController>().enemies)
+        {
+            if (enemy != self && !enemy.GetComponent<EnemyController>().hasShield)
+            {
+                Vector3 distance = enemy.transform.position - transform.position;
+                float dist = Mathf.Sqrt(Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2));
+                if (dist < nearest)
+                {
+                    nearest = dist;
+                    nearestEnemy = enemy;
+                }
+            }
+        }
+
+        return nearestEnemy;
+    }
+
+    protected void moveTowardsNearestEnemy()
+    {
+        rb2d.velocity = new Vector2(transform.up.x, transform.up.y) * speed;
+    }
+
+    protected void moveTowardsNearestOrb()
     {
         rb2d.velocity = new Vector2(transform.up.x, transform.up.y) * speed;
     }
@@ -70,6 +98,13 @@ public class EnemyController : MonoBehaviour {
     protected void rotateTowardsPlayer()
     {
         Vector3 direction = player.transform.position - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    protected void rotateTowardsNearestEnemy(GameObject enemy)
+    {
+        Vector3 direction = enemy.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
@@ -114,16 +149,28 @@ public class EnemyController : MonoBehaviour {
     {
         if (other.tag == "Bullet" && (other.GetComponent<BulletController>().getParent() != gameObject || Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() + 0.1f))
         {
-            if (health - 1 <= 0)
+            if (hasShield)
+            {
+                hasShield = false;
+                transform.Find("Shield").GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else if (health - 1 <= 0)
             {
                 GameObject spawnedOrb = Instantiate(orb, transform.position, Quaternion.identity);
                 game.GetComponent<GameController>().orbs.AddLast(spawnedOrb);
+                game.GetComponent<GameController>().enemies.Remove(gameObject);
                 Destroy(gameObject);
             }
             else
             {
                 health -= 1;
             }
+        }
+        else if (other.tag == "ShieldProjectile" && (other.GetComponent<BulletController>().getParent() != gameObject || Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() + 0.1f))
+        {
+            hasShield = true;
+            transform.Find("Shield").GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
+            transform.Find("Shield").GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 

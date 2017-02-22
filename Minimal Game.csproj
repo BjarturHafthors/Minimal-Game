@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Enemy2Controller.cs" />
     <Compile Include="Assets\Scripts\Enemy3Controller.cs" />
     <Compile Include="Assets\Scripts\Enemy4Controller.cs" />
+    <Compile Include="Assets\Scripts\Enemy5Controller.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\HUDController.cs" />

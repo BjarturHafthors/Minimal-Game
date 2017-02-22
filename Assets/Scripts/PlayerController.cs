@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour {
     private float bulletSpawnOffset;
     public GameObject orb;
     public GameObject game;
+    private bool hasShield;
     
     // Use this for initialization
 	void Start () {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         timeOfLastShot = Time.time - shootCooldown;
         bulletSpawnOffset = 1;
+        hasShield = false;
     }
 
     // Update is called once per frame
@@ -78,7 +80,12 @@ public class PlayerController : MonoBehaviour {
     {
         if (other.tag == "Bullet" && (other.GetComponent<BulletController>().getParent() != gameObject || Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() + 0.1f))
         {
-            if (health-1 < 0)
+            if (hasShield)
+            {
+                hasShield = false;
+                transform.Find("Shield").GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else if (health-1 < 0)
             {
                 SceneManager.LoadScene(2);
             }
@@ -88,6 +95,12 @@ public class PlayerController : MonoBehaviour {
                 GameObject spawnedOrb = Instantiate(orb, transform.position, Quaternion.identity);
                 game.GetComponent<GameController>().orbs.AddLast(spawnedOrb);
             }
+        }
+        else if (other.tag == "ShieldProjectile")
+        {
+            hasShield = true;
+            transform.Find("Shield").GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
+            transform.Find("Shield").GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 }

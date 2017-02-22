@@ -11,9 +11,10 @@ public class OrbController : MonoBehaviour {
     private float yOrigin;
     private int lastFLoatDirection;
     private float timeOfSpawn;
+    private bool destroy;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         yOrigin = gameObject.transform.position.y;
@@ -24,7 +25,7 @@ public class OrbController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		
+
 	}
 
     void FixedUpdate()
@@ -52,13 +53,32 @@ public class OrbController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player" && Time.time >= timeOfSpawn + 0.2f)
+        if (other.tag == "Player" && Time.time >= timeOfSpawn + 0.1f)
         {
-            other.GetComponent<PlayerController>().health += value;
-            other.GetComponent<PlayerController>().game.GetComponent<GameController>().orbs.Remove(gameObject);
+            PlayerController pc = other.GetComponent<PlayerController>();
+            pc.health += value;
+            pc.game.GetComponent<GameController>().orbs.Remove(gameObject);
+
+            if (pc.health <= 50)
+            {
+                pc.setSprite(1);
+            }
+            else if (pc.health > 50 && pc.health <= 500)
+            {
+                pc.setSprite(2);
+            }
+            else if (pc.health > 500 && pc.health < 5000)
+            {
+                pc.setSprite(3);
+            }
+            else
+            {
+                pc.setSprite(4);
+            }
+            
             Destroy(gameObject);
         }
-        else if (other.tag == "Enemy" && Time.time >= timeOfSpawn + 0.2f)
+        else if (other.tag == "Enemy" && Time.time >= timeOfSpawn + 0.1f)
         {
             other.GetComponent<EnemyController>().health += value;
             other.GetComponent<EnemyController>().game.GetComponent<GameController>().orbs.Remove(gameObject);

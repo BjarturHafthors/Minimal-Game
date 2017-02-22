@@ -28,9 +28,16 @@ public class Enemy2Controller : EnemyController
         {
             GameObject nearest = findNearestOrb();
 
-            rotateTowardsNearestOrb(nearest);
+            if (nearest == null)
+            {
+                // Do nothing
+            }
+            else
+            {
+                rotateTowardsNearestOrb(nearest);
 
-            moveTowardsNearestOrb();
+                moveTowardsNearestOrb();
+            }
         }
         else
         {

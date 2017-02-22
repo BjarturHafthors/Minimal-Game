@@ -15,13 +15,19 @@ public class PlayerController : MonoBehaviour {
     public GameObject orb;
     public GameObject game;
     private bool hasShield;
-    
+    public Sprite sprite1;
+    public Sprite sprite2;
+    public Sprite sprite3;
+    public Sprite sprite4;
+    private SpriteRenderer spriteRenderer;
+
     // Use this for initialization
-	void Start () {
+    void Start () {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         timeOfLastShot = Time.time - shootCooldown;
         bulletSpawnOffset = 1;
         hasShield = false;
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -101,6 +107,26 @@ public class PlayerController : MonoBehaviour {
             hasShield = true;
             transform.Find("Shield").GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
             transform.Find("Shield").GetComponent<SpriteRenderer>().enabled = true;
+        }
+    }
+
+    public void setSprite(int number)
+    {
+        if (number == 1)
+        {
+            spriteRenderer.sprite = sprite1;
+        }
+        else if (number == 2)
+        {
+            spriteRenderer.sprite = sprite2;
+        }
+        else if (number == 3)
+        {
+            spriteRenderer.sprite = sprite3;
+        }
+        else
+        {
+            spriteRenderer.sprite = sprite4;
         }
     }
 }

@@ -48,16 +48,20 @@ public class EnemyController : MonoBehaviour {
 
     protected GameObject findNearestOrb()
     {
-        GameObject nearestOrb = new GameObject();
+        GameObject nearestOrb = null;
         float nearest = 99999999;
-        foreach (GameObject orb in game.GetComponent<GameController>().orbs)
+        for (int i = game.GetComponent<GameController>().orbs.Count - 1; i >= 0; i--)
         {
-            Vector3 distance = orb.transform.position - transform.position;
-            float dist = Mathf.Sqrt(Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2));
-            if (dist < nearest)
+            if (game.GetComponent<GameController>().orbs[i] != null)
             {
-                nearest = dist;
-                nearestOrb = orb;
+                GameObject orb = game.GetComponent<GameController>().orbs[i];
+                Vector3 distance = orb.transform.position - transform.position;
+                float dist = Mathf.Sqrt(Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2));
+                if (dist < nearest)
+                {
+                    nearest = dist;
+                    nearestOrb = orb;
+                }
             }
         }
 
@@ -108,16 +112,9 @@ public class EnemyController : MonoBehaviour {
 
     protected void rotateTowardsNearestEnemy(GameObject enemy)
     {
-        //if (enemy != null)
-        {
             Vector3 direction = enemy.transform.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
-       /* else
-        {
-            rotateTowardsPlayer();
-        }*/
     }
 
     protected void rotateAwayFromPlayer()

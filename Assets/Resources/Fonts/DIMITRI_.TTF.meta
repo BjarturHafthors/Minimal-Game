@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: b9644bc6c61b64567b90fd6d4ef0a1bc
+timeCreated: 1490473408
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Dimitri
+  fontNames:
+  - Dimitri
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -19,13 +19,6 @@ public class EnemyController : MonoBehaviour {
     private int strength;
     public bool hasPickedUpOrb;
 
-    public GameObject brownOrb;
-    public GameObject pinkOrb;
-    public GameObject greenOrb;
-    public GameObject yellowOrb;
-    public GameObject redOrb;
-    public GameObject whiteOrb;
-
     // Use this for initialization
     public virtual void Start() {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
@@ -252,12 +245,12 @@ public class EnemyController : MonoBehaviour {
     private void spawnOrb()
     {
         int lucky = Random.Range(0, 100);
-
-        GameObject orb;
+        
+        int orbStrength;
 
         if (lucky == 0)
         {
-            orb = getCorrectOrb(strength + 2);
+            orbStrength = strength + 2;
         }
         else
         {
@@ -265,13 +258,15 @@ public class EnemyController : MonoBehaviour {
 
             if(semiLucky == 0)
         {
-                orb = getCorrectOrb(strength + 1);
+                orbStrength = strength + 1;
             }
             else
             {
-                orb = getCorrectOrb(strength);
+                orbStrength = strength;
             }
         }
+
+        GameObject orb = getCorrectOrb(orbStrength);
 
         GameObject spawnedOrb = Instantiate(orb, transform.position, Quaternion.identity);
         game.GetComponent<GameController>().orbs.Add(spawnedOrb);
@@ -280,29 +275,33 @@ public class EnemyController : MonoBehaviour {
 
     private GameObject getCorrectOrb(int strength)
     {
+        string path =  "Prefabs/";
+
         if (strength == 1)
         {
-            return brownOrb;
+            path += "BrownOrb";
         }
         else if (strength == 2)
         {
-            return pinkOrb;
+            path += "PinkOrb";
         }
         else if (strength == 3)
         {
-            return greenOrb;
+            path += "GreenOrb";
         }
         else if (strength == 4)
         {
-            return yellowOrb;
+            path += "YellowOrb";
         }
         else if (strength == 5)
         {
-            return redOrb;
+            path += "RedOrb";
         }
         else
         {
-            return whiteOrb;
+            path += "WhiteOrb";
         }
+
+        return Resources.Load<GameObject> (path);
     }
 }

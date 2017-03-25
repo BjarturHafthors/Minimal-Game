@@ -21,13 +21,6 @@ public class PlayerController : MonoBehaviour {
     private SpriteRenderer spriteRenderer;
     private int strength;
 
-    public GameObject brownOrb;
-    public GameObject pinkOrb;
-    public GameObject greenOrb;
-    public GameObject yellowOrb;
-    public GameObject redOrb;
-    public GameObject whiteOrb;
-
     // Use this for initialization
     void Start () {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
@@ -129,33 +122,34 @@ public class PlayerController : MonoBehaviour {
 
     private void spawnOrb(int bulletStrength)
     {
-        GameObject orb;
+        string path =  "Prefabs/";
 
         if (strength == 1)
         {
-            orb = pinkOrb;
+            path += "PinkOrb";
         }
         else if (strength == 2)
         {
-            orb = greenOrb;
+            path += "GreenOrb";
         }
         else if (strength == 3)
         {
-            orb = yellowOrb;
+            path += "YellowOrb";
         }
         else
         {
-            orb = redOrb;
+            path += "RedOrb";
         }
 
-        if (health - orb.GetComponent<OrbController>().value <= 0)
+        GameObject spawnedOrb = Instantiate(Resources.Load<GameObject> (path), transform.position, Quaternion.identity);
+
+        if (health - spawnedOrb.GetComponent<OrbController>().value <= 0)
         {
             SceneManager.LoadScene(2);
         }
         else
         {
-            health -= orb.GetComponent<OrbController>().value;
-            GameObject spawnedOrb = Instantiate(orb, transform.position, Quaternion.identity);
+            health -= spawnedOrb.GetComponent<OrbController>().value;
             game.GetComponent<GameController>().orbs.Add(spawnedOrb);
         }   
     }

@@ -12,6 +12,7 @@ public class OrbController : MonoBehaviour {
     private int lastFLoatDirection;
     private float timeOfSpawn;
     private bool destroy;
+	private GameController gameController;
 
     // Use this for initialization
     void Start ()
@@ -58,23 +59,6 @@ public class OrbController : MonoBehaviour {
             PlayerController pc = other.GetComponent<PlayerController>();
             pc.health += value;
             pc.game.GetComponent<GameController>().orbs.Remove(gameObject);
-
-            if (pc.health <= 50)
-            {
-                pc.setSprite(1);
-            }
-            else if (pc.health > 50 && pc.health <= 350)
-            {
-                pc.setSprite(2);
-            }
-            else if (pc.health > 350 && pc.health < 2500)
-            {
-                pc.setSprite(3);
-            }
-            else
-            {
-                pc.setSprite(4);
-            }
             
             Destroy(gameObject);
         }

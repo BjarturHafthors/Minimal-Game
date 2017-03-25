@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour {
             orb = redOrb;
         }
 
-        if (health - orb.GetComponent<OrbController>().value < 0)
+        if (health - orb.GetComponent<OrbController>().value <= 0)
         {
             SceneManager.LoadScene(2);
         }

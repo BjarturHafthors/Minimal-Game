@@ -21,13 +21,6 @@ public class PlayerController : MonoBehaviour {
     private SpriteRenderer spriteRenderer;
     private int strength;
 
-    public GameObject brownOrb;
-    public GameObject pinkOrb;
-    public GameObject greenOrb;
-    public GameObject yellowOrb;
-    public GameObject redOrb;
-    public GameObject whiteOrb;
-
     // Use this for initialization
     void Start () {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
@@ -92,55 +85,71 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Bullet" && (other.GetComponent<BulletController>().getParent() != gameObject || Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() + 0.1f))
-        {
-            if (hasShield)
-            {
-                hasShield = false;
-                transform.Find("Shield").GetComponent<SpriteRenderer>().enabled = false;
-            }
-            else
-            {
-                spawnOrb(strength);
-            }
-        }
-        else if (other.tag == "ShieldProjectile")
-        {
-            hasShield = true;
-            transform.Find("Shield").GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
-            transform.Find("Shield").GetComponent<SpriteRenderer>().enabled = true;
-        }
-    }
+		if (other.tag == "Bullet" && (other.GetComponent<BulletController> ().getParent () != gameObject || Time.time > other.gameObject.GetComponent<BulletController> ().getTimeOfSpawn () + 0.1f)) 
+		{
+			if (hasShield) 
+			{
+				hasShield = false;
+				transform.Find ("Shield").GetComponent<SpriteRenderer> ().enabled = false;
+			} 
+			else 
+			{
+				spawnOrb (strength);
+			}
+		} 
+		else if (other.tag == "ShieldProjectile") 
+		{
+			hasShield = true;
+			transform.Find ("Shield").GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, .75f);
+			transform.Find ("Shield").GetComponent<SpriteRenderer> ().enabled = true;
+		} 
+		else if (other.tag == "PickUp") 
+		{
+			if (strength == 1 && health >= 30 && health < 350)
+			{
+				setSprite(2);
+			}
+			else if (strength == 2 && health >= 350 && health < 2500)
+			{
+				setSprite(3);
+			}
+			else if (strength == 3 && health > 2500)
+			{
+				setSprite(4);
+			}
+		}
+	}
 
     private void spawnOrb(int bulletStrength)
     {
-        GameObject orb;
+        string path =  "Prefabs/";
 
         if (strength == 1)
         {
-            orb = pinkOrb;
+            path += "PinkOrb";
         }
         else if (strength == 2)
         {
-            orb = greenOrb;
+            path += "GreenOrb";
         }
         else if (strength == 3)
         {
-            orb = yellowOrb;
+            path += "YellowOrb";
         }
         else
         {
-            orb = redOrb;
+            path += "RedOrb";
         }
 
-        if (health - orb.GetComponent<OrbController>().value < 0)
+        GameObject spawnedOrb = Instantiate(Resources.Load<GameObject> (path), transform.position, Quaternion.identity);
+
+        if (health - spawnedOrb.GetComponent<OrbController>().value <= 0)
         {
             SceneManager.LoadScene(2);
         }
         else
         {
-            health -= orb.GetComponent<OrbController>().value;
-            GameObject spawnedOrb = Instantiate(orb, transform.position, Quaternion.identity);
+            health -= spawnedOrb.GetComponent<OrbController>().value;
             game.GetComponent<GameController>().orbs.Add(spawnedOrb);
         }   
     }

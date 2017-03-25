@@ -59,11 +59,11 @@ public class OrbController : MonoBehaviour {
             pc.health += value;
             pc.game.GetComponent<GameController>().orbs.Remove(gameObject);
 
-            if (pc.health <= 50)
+            if (pc.health <= 30)
             {
                 pc.setSprite(1);
             }
-            else if (pc.health > 50 && pc.health <= 350)
+            else if (pc.health > 30 && pc.health <= 350)
             {
                 pc.setSprite(2);
             }

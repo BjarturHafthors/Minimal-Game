@@ -92,25 +92,40 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Bullet" && (other.GetComponent<BulletController>().getParent() != gameObject || Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() + 0.1f))
-        {
-            if (hasShield)
-            {
-                hasShield = false;
-                transform.Find("Shield").GetComponent<SpriteRenderer>().enabled = false;
-            }
-            else
-            {
-                spawnOrb(strength);
-            }
-        }
-        else if (other.tag == "ShieldProjectile")
-        {
-            hasShield = true;
-            transform.Find("Shield").GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
-            transform.Find("Shield").GetComponent<SpriteRenderer>().enabled = true;
-        }
-    }
+		if (other.tag == "Bullet" && (other.GetComponent<BulletController> ().getParent () != gameObject || Time.time > other.gameObject.GetComponent<BulletController> ().getTimeOfSpawn () + 0.1f)) 
+		{
+			if (hasShield) 
+			{
+				hasShield = false;
+				transform.Find ("Shield").GetComponent<SpriteRenderer> ().enabled = false;
+			} 
+			else 
+			{
+				spawnOrb (strength);
+			}
+		} 
+		else if (other.tag == "ShieldProjectile") 
+		{
+			hasShield = true;
+			transform.Find ("Shield").GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, .75f);
+			transform.Find ("Shield").GetComponent<SpriteRenderer> ().enabled = true;
+		} 
+		else if (other.tag == "PickUp") 
+		{
+			if (strength == 1 && health >= 30 && health < 350)
+			{
+				setSprite(2);
+			}
+			else if (strength == 2 && health >= 350 && health < 2500)
+			{
+				setSprite(3);
+			}
+			else if (strength == 3 && health > 2500)
+			{
+				setSprite(4);
+			}
+		}
+	}
 
     private void spawnOrb(int bulletStrength)
     {

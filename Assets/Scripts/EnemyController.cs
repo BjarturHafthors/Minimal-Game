@@ -184,6 +184,7 @@ public class EnemyController : MonoBehaviour {
         {
             GameObject shotBullet = Instantiate(bullet, transform.position + transform.forward * bulletSpawnOffset, transform.rotation);
             shotBullet.GetComponent<BulletController>().setParent(gameObject);
+            shotBullet.GetComponent<BulletController>().strength = strength;
             timeOfLastShot = Time.time;
         }
     }

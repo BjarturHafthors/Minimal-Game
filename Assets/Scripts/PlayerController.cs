@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour {
         {
             GameObject shotBullet = Instantiate(bullet, transform.position + transform.forward*bulletSpawnOffset, transform.rotation);
             shotBullet.GetComponent<BulletController>().setParent(gameObject);
+            shotBullet.GetComponent<BulletController>().strength = difficulty;
             timeOfLastShot = Time.time;
         }
 
@@ -90,7 +91,7 @@ public class PlayerController : MonoBehaviour {
 			} 
 			else 
 			{
-				spawnOrb(other.GetComponent<BulletController> ().getParent().gameObject);
+				spawnOrb(other.GetComponent<BulletController> ().strength);
 			}
 		} 
 		else if (other.tag == "ShieldProjectile") 
@@ -101,30 +102,19 @@ public class PlayerController : MonoBehaviour {
 		} 
 	}
 
-    public void spawnOrb(GameObject bulletOwner)
+    public void spawnOrb(int strength)
     {
         string path =  "Prefabs/";
 
-        int damage;
-
-        if (bulletOwner.tag == "Enemy")
-        {
-            damage = bulletOwner.GetComponent<EnemyController>().getStrength();
-        }
-        else
-        {
-            damage = difficulty;
-        }
-
-        if (damage == 1)
+        if (strength == 1)
         {
             path += "PinkOrb";
         }
-        else if (damage == 2)
+        else if (strength == 2)
         {
             path += "GreenOrb";
         }
-        else if (damage == 3)
+        else if (strength == 3)
         {
             path += "YellowOrb";
         }

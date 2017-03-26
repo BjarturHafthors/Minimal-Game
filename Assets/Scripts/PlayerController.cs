@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour {
 			} 
 			else 
 			{
-				spawnOrb();
+				spawnOrb(other.GetComponent<BulletController> ().getParent().gameObject);
 			}
 		} 
 		else if (other.tag == "ShieldProjectile") 
@@ -101,19 +101,30 @@ public class PlayerController : MonoBehaviour {
 		} 
 	}
 
-    private void spawnOrb()
+    public void spawnOrb(GameObject bulletOwner)
     {
         string path =  "Prefabs/";
 
-        if (difficulty == 1)
+        int damage;
+
+        if (bulletOwner.tag == "Enemy")
+        {
+            damage = bulletOwner.GetComponent<EnemyController>().getStrength();
+        }
+        else
+        {
+            damage = difficulty;
+        }
+
+        if (damage == 1)
         {
             path += "PinkOrb";
         }
-        else if (difficulty == 2)
+        else if (damage == 2)
         {
             path += "GreenOrb";
         }
-        else if (difficulty == 3)
+        else if (damage == 3)
         {
             path += "YellowOrb";
         }

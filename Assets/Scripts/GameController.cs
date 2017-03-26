@@ -154,15 +154,15 @@ public class GameController : MonoBehaviour {
             level4SpawnRate += 10;
         }
 
-        if (playerDifficulty == 1 && level2SpawnRate >= 100)
+        if (playerDifficulty == 1 && level2SpawnRate >= 50)
         {
             player.GetComponent<PlayerController>().setDifficulty(2);
         }
-        else if (playerDifficulty == 2 && level3SpawnRate >= 150)
+        else if (playerDifficulty == 2 && level3SpawnRate >= 100)
         {
             player.GetComponent<PlayerController>().setDifficulty(3);
         }
-        else if (playerDifficulty == 3 && level4SpawnRate >= 150)
+        else if (playerDifficulty == 3 && level4SpawnRate >= 100)
         {
             player.GetComponent<PlayerController>().setDifficulty(4);
         }

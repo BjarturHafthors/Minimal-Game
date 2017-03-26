@@ -124,6 +124,7 @@ public class GameController : MonoBehaviour {
             level2SpawnRate += 1;
             level3SpawnRate += 5;
             level4SpawnRate += 1;
+            spawnCooldown -= 0.01f;
         }
         else if (playerDifficulty == 3)
         {
@@ -134,6 +135,7 @@ public class GameController : MonoBehaviour {
             
             level3SpawnRate += 1;
             level4SpawnRate += 5;
+            spawnCooldown -= 0.02f;
         }
         else
         {
@@ -152,6 +154,7 @@ public class GameController : MonoBehaviour {
             }
             
             level4SpawnRate += 10;
+            spawnCooldown -= 0.03f;
         }
 
         if (playerDifficulty == 1 && level2SpawnRate >= 50)

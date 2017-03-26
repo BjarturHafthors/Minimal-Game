@@ -13,7 +13,7 @@ public class Enemy3Controller : EnemyController
     // Update is called once per frame
     public override void Update()
     {
-        if (game.GetComponent<GameController>().orbs.Count == 0 && health <= getInitialHealth())
+        if (!hasPickedUpOrb && game.GetComponent<GameController>().orbs.Count == 0 /*&& health <= getInitialHealth()*/)
         {
             rotateTowardsPlayer();
 
@@ -40,7 +40,7 @@ public class Enemy3Controller : EnemyController
 
             moveAwayFromPlayer();
 
-            speed += 0.2f;
+            speed *= 1.2f;
         }
     }
 }

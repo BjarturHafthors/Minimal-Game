@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuController : MonoBehaviour {
+public class ButtonManager : MonoBehaviour {
 
 	[SerializeField]
 	public Transform mainMenu;
@@ -32,10 +32,10 @@ public class MainMenuController : MonoBehaviour {
 	}
 
 	public void Mute() {
-		//BackgroundMusic.Instance.Mute (); 
+		BackgroundMusic.Instance.Mute (); 
 	}
 
-	public void Controls(bool Open) {
+	public void Controls() {
 		if (controlsMenu.gameObject.activeInHierarchy == false) {
 			mainMenu.gameObject.SetActive (false);
 			controlsMenu.gameObject.SetActive (true);

@@ -11,6 +11,12 @@ public class GameController : MonoBehaviour {
     public List<GameObject> orbs;
     public List<GameObject> enemies;
     public float spawnAreaLength;
+    private float timeOfStart;
+    private float gameTime;
+    public int level1SpawnRate;
+    public int level2SpawnRate;
+    public int level3SpawnRate;
+    public int level4SpawnRate;
 
     public GameObject enemy1Orange;
     public GameObject enemy1Green;
@@ -40,17 +46,20 @@ public class GameController : MonoBehaviour {
         orbs = new List<GameObject>();
         enemies = new List<GameObject>();
         initialCooldown = spawnCooldown;
+        timeOfStart = Time.time;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        gameTime = Time.time - timeOfStart;
+
         if (Time.time >= spawnCooldown + timeOfLastSpawn)
         {
             spawnEnemies();
             timeOfLastSpawn = Time.time;
 
-            if (player.GetComponent<PlayerController>().getStrength() == 4)
+            if (player.GetComponent<PlayerController>().getDifficulty() == 4)
             {
                 spawnCooldown -= 0.05f;
             }
@@ -91,111 +100,98 @@ public class GameController : MonoBehaviour {
             spawnLocation = new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(stageDimensions.y, spawnArea.y), 0);
         }
 
-        int enemyType = Random.Range(1, 6);
-        int playerStrength = player.GetComponent<PlayerController>().getStrength();
-        
-        GameObject enemyToBeSpawned;
+        int enemyType = Random.Range(1, 6);        
+        int enemyLevel = Random.Range(0, getTotalSpawnRate());
 
-        if (enemyType == 1)
+        string path =  "Prefabs/Enemy" + enemyType;
+
+        if (enemyLevel <= level1SpawnRate)
         {
-            if (playerStrength == 1)
-            {
-                enemyToBeSpawned = enemy1Green;
-            }
-            else if (playerStrength == 2)
-            {
-                enemyToBeSpawned = enemy1Blue;
-            }
-            else if (playerStrength == 3)
-            {
-                enemyToBeSpawned = enemy1Orange;
-            }
-            else
-            {
-                enemyToBeSpawned = enemy1Dark;
-            }
+            path += "Green";
         }
-        else if (enemyType == 2)
+        else if (enemyLevel <= level2SpawnRate+level1SpawnRate)
         {
-            if (playerStrength == 1)
-            {
-                enemyToBeSpawned = enemy2Green;
-            }
-            else if (playerStrength == 2)
-            {
-                enemyToBeSpawned = enemy2Blue;
-            }
-            else if (playerStrength == 3)
-            {
-                enemyToBeSpawned = enemy2Orange;
-            }
-            else
-            {
-                enemyToBeSpawned = enemy2Dark;
-            }
+            path += "Blue";
         }
-        else if (enemyType == 3)
+        else if (enemyLevel <= level3SpawnRate+level2SpawnRate+level1SpawnRate)
         {
-            if (playerStrength == 1)
-            {
-                enemyToBeSpawned = enemy3Green;
-            }
-            else if (playerStrength == 2)
-            {
-                enemyToBeSpawned = enemy3Blue;
-            }
-            else if (playerStrength == 3)
-            {
-                enemyToBeSpawned = enemy3Orange;
-            }
-            else
-            {
-                enemyToBeSpawned = enemy3Dark;
-            }
+            path += "Orange";
         }
-        else if (enemyType == 4)
+        else
         {
-            if (playerStrength == 1)
-            {
-                enemyToBeSpawned = enemy4Green;
-            }
-            else if (playerStrength == 2)
-            {
-                enemyToBeSpawned = enemy4Blue;
-            }
-            else if (playerStrength == 3)
-            {
-                enemyToBeSpawned = enemy4Orange;
-            }
-            else
-            {
-                enemyToBeSpawned = enemy4Dark;
-            }
-        }
-        else 
-        {
-            if (playerStrength == 1)
-            {
-                enemyToBeSpawned = enemy5Green;
-            }
-            else if (playerStrength == 2)
-            {
-                enemyToBeSpawned = enemy5Blue;
-            }
-            else if (playerStrength == 3)
-            {
-                enemyToBeSpawned = enemy5Orange;
-            }
-            else
-            {
-                enemyToBeSpawned = enemy5Dark;
-            }
+            path += "Dark";
         }
 
-        GameObject spawnedEnemy = Instantiate(enemyToBeSpawned, spawnLocation, Quaternion.identity);
+        updateSpawnRates();
+
+        GameObject spawnedEnemy = Instantiate(Resources.Load<GameObject>(path), spawnLocation, Quaternion.identity);
         spawnedEnemy.GetComponent<EnemyController>().player = player;
         spawnedEnemy.GetComponent<EnemyController>().setGame(gameObject);
-        spawnedEnemy.GetComponent<EnemyController>().setStrength(playerStrength);
+        int playerDifficulty = player.GetComponent<PlayerController>().getDifficulty();
+        spawnedEnemy.GetComponent<EnemyController>().setStrength(playerDifficulty);
         enemies.Add(spawnedEnemy);
+    }
+
+    public int getTotalSpawnRate()
+    {
+        return level1SpawnRate + level2SpawnRate + level3SpawnRate + level4SpawnRate;
+    }
+
+    public void updateSpawnRates()
+    {
+        int playerDifficulty = player.GetComponent<PlayerController>().getDifficulty();
+
+        if (playerDifficulty == 1)
+        {
+            level2SpawnRate += 5;
+            level3SpawnRate += 1;
+        }
+        else if (playerDifficulty == 2)
+        {
+            level2SpawnRate += 1;
+            level3SpawnRate += 5;
+            level4SpawnRate += 1;
+        }
+        else if (playerDifficulty == 3)
+        {
+            if (level1SpawnRate > 0)
+            {
+                level1SpawnRate -= 1;
+            }
+            
+            level3SpawnRate += 1;
+            level4SpawnRate += 5;
+        }
+        else
+        {
+            if (level1SpawnRate > 4)
+            {
+                level1SpawnRate -= 5;
+            }
+            else if (level1SpawnRate < 0)
+            {
+                level1SpawnRate = 0;
+            }
+
+            if (level2SpawnRate > 0)
+            {
+                level2SpawnRate -= 1;
+            }
+            
+            level4SpawnRate += 10;
+        }
+
+        if (playerDifficulty == 1 && level2SpawnRate >= 100)
+        {
+            player.GetComponent<PlayerController>().setDifficulty(2);
+        }
+        else if (playerDifficulty == 2 && level3SpawnRate >= 150)
+        {
+            player.GetComponent<PlayerController>().setDifficulty(3);
+        }
+        else if (playerDifficulty == 2 && level4SpawnRate >= 150)
+        {
+            player.GetComponent<PlayerController>().setDifficulty(4);
+        }
     }
 }

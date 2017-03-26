@@ -14,12 +14,8 @@ public class PlayerController : MonoBehaviour {
     private float bulletSpawnOffset;
     public GameObject game;
     private bool hasShield;
-    public Sprite sprite1;
-    public Sprite sprite2;
-    public Sprite sprite3;
-    public Sprite sprite4;
     private SpriteRenderer spriteRenderer;
-    private int strength;
+    private int difficulty;
 
     // Use this for initialization
     void Start () {
@@ -28,7 +24,7 @@ public class PlayerController : MonoBehaviour {
         bulletSpawnOffset = 1;
         hasShield = false;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        strength = 1;
+        difficulty = 1;
     }
 
     // Update is called once per frame
@@ -94,7 +90,7 @@ public class PlayerController : MonoBehaviour {
 			} 
 			else 
 			{
-				spawnOrb (strength);
+				spawnOrb();
 			}
 		} 
 		else if (other.tag == "ShieldProjectile") 
@@ -103,36 +99,36 @@ public class PlayerController : MonoBehaviour {
 			transform.Find ("Shield").GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, .75f);
 			transform.Find ("Shield").GetComponent<SpriteRenderer> ().enabled = true;
 		} 
-		else if (other.tag == "PickUp") 
+		/*else if (other.tag == "PickUp") 
 		{
-			if (strength == 1 && health >= 30 && health < 350)
+			if (difficulty == 1 && health >= 30 && health < 350)
 			{
 				setSprite(2);
 			}
-			else if (strength == 2 && health >= 350 && health < 2500)
+			else if (difficulty == 2 && health >= 350 && health < 2500)
 			{
 				setSprite(3);
 			}
-			else if (strength == 3 && health > 2500)
+			else if (difficulty == 3 && health > 2500)
 			{
 				setSprite(4);
 			}
-		}
+		}*/
 	}
 
-    private void spawnOrb(int bulletStrength)
+    private void spawnOrb()
     {
         string path =  "Prefabs/";
 
-        if (strength == 1)
+        if (difficulty == 1)
         {
             path += "PinkOrb";
         }
-        else if (strength == 2)
+        else if (difficulty == 2)
         {
             path += "GreenOrb";
         }
-        else if (strength == 3)
+        else if (difficulty == 3)
         {
             path += "YellowOrb";
         }
@@ -154,32 +150,27 @@ public class PlayerController : MonoBehaviour {
         }   
     }
 
-    public void setSprite(int number)
+    public int getDifficulty()
     {
-        if (number == 1)
-        {
-            spriteRenderer.sprite = sprite1;
-            strength = 1;
-        }
-        else if (number == 2)
-        {
-            spriteRenderer.sprite = sprite2;
-            strength = 2;
-        }
-        else if (number == 3)
-        {
-            spriteRenderer.sprite = sprite3;
-            strength = 3;
-        }
-        else
-        {
-            spriteRenderer.sprite = sprite4;
-            strength = 4;
-        }
+        return difficulty;
     }
 
-    public int getStrength()
+    public void setDifficulty(int difficulty)
     {
-        return strength;
+        if (difficulty == 2)
+        {
+            spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player/PlayerBlue");
+            this.difficulty = 2;
+        }
+        else if (difficulty == 3)
+        {
+            spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player/PlayerGreen");
+            this.difficulty = 3;
+        }
+        else if (difficulty == 4)
+        {
+            spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/Player/PlayerRed");
+            this.difficulty = 4;
+        }
     }
 }

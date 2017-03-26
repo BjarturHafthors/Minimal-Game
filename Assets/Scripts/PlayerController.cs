@@ -99,21 +99,6 @@ public class PlayerController : MonoBehaviour {
 			transform.Find ("Shield").GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, .75f);
 			transform.Find ("Shield").GetComponent<SpriteRenderer> ().enabled = true;
 		} 
-		/*else if (other.tag == "PickUp") 
-		{
-			if (difficulty == 1 && health >= 30 && health < 350)
-			{
-				setSprite(2);
-			}
-			else if (difficulty == 2 && health >= 350 && health < 2500)
-			{
-				setSprite(3);
-			}
-			else if (difficulty == 3 && health > 2500)
-			{
-				setSprite(4);
-			}
-		}*/
 	}
 
     private void spawnOrb()

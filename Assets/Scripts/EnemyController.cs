@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour {
     public GameObject game;
     private float initialHealth;
     private bool hasShield;
-    private int strength;
+    public int strength;
     public bool hasPickedUpOrb;
 
     // Use this for initialization
@@ -273,27 +273,27 @@ public class EnemyController : MonoBehaviour {
         game.GetComponent<GameController>().enemies.Remove(gameObject);
     }
 
-    private GameObject getCorrectOrb(int strength)
+    private GameObject getCorrectOrb(int orbStrength)
     {
         string path =  "Prefabs/";
 
-        if (strength == 1)
+        if (orbStrength == 1)
         {
             path += "BrownOrb";
         }
-        else if (strength == 2)
+        else if (orbStrength == 2)
         {
             path += "PinkOrb";
         }
-        else if (strength == 3)
+        else if (orbStrength == 3)
         {
             path += "GreenOrb";
         }
-        else if (strength == 4)
+        else if (orbStrength == 4)
         {
             path += "YellowOrb";
         }
-        else if (strength == 5)
+        else if (orbStrength == 5)
         {
             path += "RedOrb";
         }

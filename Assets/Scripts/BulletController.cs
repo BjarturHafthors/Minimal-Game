@@ -102,7 +102,7 @@ public class BulletController : MonoBehaviour
 
         for (int i = 0; i < nearbyEnemies.Length; i++)
         {
-            if (nearbyEnemies[i].gameObject.tag == "Enemy")
+            if (nearbyEnemies[i].gameObject.tag == "Enemy" && nearbyEnemies[i].gameObject.GetComponent<EnemyController>().isOnScreen())
             {
                 Vector2 direction = nearbyEnemies[i].transform.position - transform.position;
                 angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;

@@ -216,7 +216,7 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    protected bool isOnScreen()
+    public bool isOnScreen()
     {
         Vector3 stageDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
 

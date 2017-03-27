@@ -6,6 +6,8 @@ public class BulletController : MonoBehaviour
 {
 
     private Rigidbody2D rb2d;
+
+    public int strength;
     public float speed;
     public float despawnTime;
     public int homeRadius;

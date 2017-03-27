@@ -11,33 +11,10 @@ public class GameController : MonoBehaviour {
     public List<GameObject> orbs;
     public List<GameObject> enemies;
     public float spawnAreaLength;
-    private float timeOfStart;
-    private float gameTime;
     public int level1SpawnRate;
     public int level2SpawnRate;
     public int level3SpawnRate;
     public int level4SpawnRate;
-
-    public GameObject enemy1Orange;
-    public GameObject enemy1Green;
-    public GameObject enemy1Blue;
-    public GameObject enemy1Dark;
-    public GameObject enemy2Orange;
-    public GameObject enemy2Green;
-    public GameObject enemy2Blue;
-    public GameObject enemy2Dark;
-    public GameObject enemy3Orange;
-    public GameObject enemy3Green;
-    public GameObject enemy3Blue;
-    public GameObject enemy3Dark;
-    public GameObject enemy4Orange;
-    public GameObject enemy4Green;
-    public GameObject enemy4Blue;
-    public GameObject enemy4Dark;
-    public GameObject enemy5Orange;
-    public GameObject enemy5Green;
-    public GameObject enemy5Blue;
-    public GameObject enemy5Dark;
 
     // Use this for initialization
     void Start ()
@@ -46,14 +23,11 @@ public class GameController : MonoBehaviour {
         orbs = new List<GameObject>();
         enemies = new List<GameObject>();
         initialCooldown = spawnCooldown;
-        timeOfStart = Time.time;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        gameTime = Time.time - timeOfStart;
-
         if (Time.time >= spawnCooldown + timeOfLastSpawn)
         {
             spawnEnemies();
@@ -128,7 +102,6 @@ public class GameController : MonoBehaviour {
         spawnedEnemy.GetComponent<EnemyController>().player = player;
         spawnedEnemy.GetComponent<EnemyController>().setGame(gameObject);
         int playerDifficulty = player.GetComponent<PlayerController>().getDifficulty();
-        spawnedEnemy.GetComponent<EnemyController>().setStrength(playerDifficulty);
         enemies.Add(spawnedEnemy);
     }
 
@@ -151,6 +124,7 @@ public class GameController : MonoBehaviour {
             level2SpawnRate += 1;
             level3SpawnRate += 5;
             level4SpawnRate += 1;
+            spawnCooldown -= 0.01f;
         }
         else if (playerDifficulty == 3)
         {
@@ -161,6 +135,7 @@ public class GameController : MonoBehaviour {
             
             level3SpawnRate += 1;
             level4SpawnRate += 5;
+            spawnCooldown -= 0.02f;
         }
         else
         {
@@ -179,17 +154,18 @@ public class GameController : MonoBehaviour {
             }
             
             level4SpawnRate += 10;
+            spawnCooldown -= 0.03f;
         }
 
-        if (playerDifficulty == 1 && level2SpawnRate >= 100)
+        if (playerDifficulty == 1 && level2SpawnRate >= 50)
         {
             player.GetComponent<PlayerController>().setDifficulty(2);
         }
-        else if (playerDifficulty == 2 && level3SpawnRate >= 150)
+        else if (playerDifficulty == 2 && level3SpawnRate >= 100)
         {
             player.GetComponent<PlayerController>().setDifficulty(3);
         }
-        else if (playerDifficulty == 2 && level4SpawnRate >= 150)
+        else if (playerDifficulty == 3 && level4SpawnRate >= 100)
         {
             player.GetComponent<PlayerController>().setDifficulty(4);
         }

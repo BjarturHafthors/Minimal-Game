@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour {
         {
             GameObject shotBullet = Instantiate(bullet, transform.position + transform.forward*bulletSpawnOffset, transform.rotation);
             shotBullet.GetComponent<BulletController>().setParent(gameObject);
+            shotBullet.GetComponent<BulletController>().strength = difficulty;
             timeOfLastShot = Time.time;
         }
 
@@ -90,7 +91,7 @@ public class PlayerController : MonoBehaviour {
 			} 
 			else 
 			{
-				spawnOrb();
+				spawnOrb(other.GetComponent<BulletController> ().strength);
 			}
 		} 
 		else if (other.tag == "ShieldProjectile") 
@@ -99,36 +100,21 @@ public class PlayerController : MonoBehaviour {
 			transform.Find ("Shield").GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, .75f);
 			transform.Find ("Shield").GetComponent<SpriteRenderer> ().enabled = true;
 		} 
-		/*else if (other.tag == "PickUp") 
-		{
-			if (difficulty == 1 && health >= 30 && health < 350)
-			{
-				setSprite(2);
-			}
-			else if (difficulty == 2 && health >= 350 && health < 2500)
-			{
-				setSprite(3);
-			}
-			else if (difficulty == 3 && health > 2500)
-			{
-				setSprite(4);
-			}
-		}*/
 	}
 
-    private void spawnOrb()
+    public void spawnOrb(int strength)
     {
         string path =  "Prefabs/";
 
-        if (difficulty == 1)
+        if (strength == 1)
         {
             path += "PinkOrb";
         }
-        else if (difficulty == 2)
+        else if (strength == 2)
         {
             path += "GreenOrb";
         }
-        else if (difficulty == 3)
+        else if (strength == 3)
         {
             path += "YellowOrb";
         }

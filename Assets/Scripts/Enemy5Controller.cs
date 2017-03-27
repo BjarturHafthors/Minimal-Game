@@ -27,7 +27,7 @@ public class Enemy5Controller : EnemyController
         {
             GameObject nearest = findNearestEnemy(gameObject);
 
-            if (nearest == null)
+            if (nearest == null || !nearest.GetComponent<EnemyController>().isOnScreen())
             {
                 // Do nothing
             }

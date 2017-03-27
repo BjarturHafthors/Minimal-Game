@@ -6,17 +6,24 @@ public class BulletController : MonoBehaviour
 {
 
     private Rigidbody2D rb2d;
-    //public float strength;
     public float speed;
     public float despawnTime;
+    public int homeRadius;
+    public float homeSpeed;
+    public float timeBeforeHome;
     private float timeOfSpawn;
     private GameObject parent;
+    private float angle;
+
 
     // Use this for initialization
     void Start()
     {
         timeOfSpawn = Time.time;
         rb2d = gameObject.GetComponent<Rigidbody2D>();
+        homeRadius = 3;
+        homeSpeed = .1f;
+        timeBeforeHome = .02f;
     }
 
     void Update()
@@ -26,21 +33,24 @@ public class BulletController : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (parent.tag == "Player" && timeOfSpawn < Time.time - timeBeforeHome)
+        {
+            home();
+        }
+
         checkIfOffscreen();
     }
     // Update is called once per frame
     void FixedUpdate()
     {
         rb2d.velocity = new Vector2(transform.up.x, transform.up.y) * speed;
+
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<PlayerController>() is PlayerController && Time.time > timeOfSpawn+0.1f)
-        {
-            Destroy(gameObject);
-        }
-        else if (other.gameObject.GetComponent<EnemyController>() is EnemyController && Time.time > timeOfSpawn + 0.1f)
+        if ((other.gameObject.GetComponent<EnemyController>() is EnemyController || other.gameObject.GetComponent<PlayerController>() is PlayerController) && Time.time > timeOfSpawn + 0.1f)
         {
             Destroy(gameObject);
         }
@@ -82,5 +92,22 @@ public class BulletController : MonoBehaviour
     public GameObject getParent()
     {
         return parent;
+    }
+
+    public void home()
+    {
+        Collider2D[] nearbyEnemies = Physics2D.OverlapCircleAll(transform.position, homeRadius);
+
+        for (int i = 0; i < nearbyEnemies.Length; i++)
+        {
+            if (nearbyEnemies[i].gameObject.tag == "Enemy")
+            {
+                Vector2 direction = nearbyEnemies[i].transform.position - transform.position;
+                angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), homeSpeed);
+                return;
+            }
+        }
+
     }
 }

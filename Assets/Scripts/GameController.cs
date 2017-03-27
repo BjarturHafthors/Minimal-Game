@@ -32,15 +32,6 @@ public class GameController : MonoBehaviour {
         {
             spawnEnemies();
             timeOfLastSpawn = Time.time;
-
-            if (player.GetComponent<PlayerController>().getDifficulty() == 4)
-            {
-                spawnCooldown -= 0.05f;
-            }
-            else if (spawnCooldown < initialCooldown)
-            {
-                spawnCooldown += 0.05f;
-            }
         }
     }
 
@@ -143,7 +134,7 @@ public class GameController : MonoBehaviour {
             {
                 level1SpawnRate -= 5;
             }
-            else if (level1SpawnRate < 0)
+            else
             {
                 level1SpawnRate = 0;
             }
@@ -154,7 +145,11 @@ public class GameController : MonoBehaviour {
             }
             
             level4SpawnRate += 10;
-            spawnCooldown -= 0.03f;
+            if(spawnCooldown > 0.83f)
+            {
+                spawnCooldown -= 0.02f;
+            }
+            
         }
 
         if (playerDifficulty == 1 && level2SpawnRate >= 50)

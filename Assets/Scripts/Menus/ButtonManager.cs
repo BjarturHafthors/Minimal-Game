@@ -28,7 +28,7 @@ public class ButtonManager : MonoBehaviour {
 	}
 
 	public void NewGame() {
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(1);//SceneManager.GetActiveScene().buildIndex + 1);
 	}
 
 	public void Mute() {

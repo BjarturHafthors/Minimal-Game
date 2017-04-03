@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour {
     public virtual void Start() {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         timeOfLastShot = Time.time - shootCooldown;
-        bulletSpawnOffset = 1;
+        bulletSpawnOffset = .5f;
         initialHealth = health;
         hasShield = false;
         hasPickedUpOrb = false;

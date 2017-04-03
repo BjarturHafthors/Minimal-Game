@@ -52,7 +52,7 @@ public class BulletController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if ((other.gameObject.GetComponent<EnemyController>() is EnemyController || other.gameObject.GetComponent<PlayerController>() is PlayerController) && Time.time > timeOfSpawn + 0.1f)
+        if ((other.gameObject != parent || Time.time > timeOfSpawn + 0.1f) && (other.gameObject.GetComponent<EnemyController>() is EnemyController || other.gameObject.GetComponent<PlayerController>() is PlayerController))
         {
             Destroy(gameObject);
         }

@@ -412,7 +412,6 @@ GameObject:
   m_Component:
   - component: {fileID: 144797375}
   - component: {fileID: 144797374}
-  - component: {fileID: 144797373}
   m_Layer: 0
   m_Name: bg
   m_TagString: Untagged
@@ -420,23 +419,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &144797373
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 144797372}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1bd7d8472b1354e458c2f655c1d2e757, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!212 &144797374
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -468,7 +450,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 957f36f3efd2c474bbbe6bdd2821ecb3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 07a44141dc459864ebe9cca6c5699faf, type: 3}
   m_Color: {r: 0.7058823, g: 0.939148, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

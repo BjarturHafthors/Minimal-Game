@@ -100,15 +100,25 @@ public class BulletController : MonoBehaviour
     {
         Collider2D[] nearbyEnemies = Physics2D.OverlapCircleAll(transform.position, homeRadius);
 
-        for (int i = 0; i < nearbyEnemies.Length; i++)
+        if (nearbyEnemies.Length > 0)
         {
-            if (nearbyEnemies[i].gameObject.tag == "Enemy" && nearbyEnemies[i].gameObject.GetComponent<EnemyController>().isOnScreen())
+            if (nearbyEnemies[0].gameObject.tag == "Enemy" && nearbyEnemies[0].gameObject.GetComponent<EnemyController>().isOnScreen())
             {
-                Vector2 direction = nearbyEnemies[i].transform.position - transform.position;
-                angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), homeSpeed);
-                return;
-            }
+                Vector2 direction = nearbyEnemies[0].transform.position - transform.position;
+		        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+		            
+                if (Vector3.Distance(nearbyEnemies[0].gameObject.transform.position, transform.position) <= 0.5)
+                {
+                	transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), homeSpeed);
+            	}
+            	else 
+            	{
+            		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), homeSpeed*2);
+            	}
+
+            	return;
+            }	
+                
         }
 
     }

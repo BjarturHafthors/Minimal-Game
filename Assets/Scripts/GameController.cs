@@ -107,14 +107,12 @@ public class GameController : MonoBehaviour {
 
         if (playerDifficulty == 1)
         {
-            level2SpawnRate += 5;
-            level3SpawnRate += 1;
+            level2SpawnRate += 2;
         }
         else if (playerDifficulty == 2)
         {
             level2SpawnRate += 1;
-            level3SpawnRate += 5;
-            level4SpawnRate += 1;
+            level3SpawnRate += 2;
             spawnCooldown -= 0.01f;
         }
         else if (playerDifficulty == 3)
@@ -123,20 +121,20 @@ public class GameController : MonoBehaviour {
             {
                 level1SpawnRate -= 1;
             }
-            
+
             level3SpawnRate += 1;
-            level4SpawnRate += 5;
+            level4SpawnRate += 2;
             spawnCooldown -= 0.02f;
         }
         else
         {
-            if (level1SpawnRate > 4)
+            if (level1SpawnRate >= 0)
             {
                 level1SpawnRate -= 5;
-            }
-            else
-            {
-                level1SpawnRate = 0;
+                if (level1SpawnRate < 0)
+                {
+                    level1SpawnRate = 0;
+                }
             }
 
             if (level2SpawnRate > 0)
@@ -144,7 +142,7 @@ public class GameController : MonoBehaviour {
                 level2SpawnRate -= 1;
             }
             
-            level4SpawnRate += 10;
+            level4SpawnRate += 4;
             if(spawnCooldown > 0.83f)
             {
                 spawnCooldown -= 0.02f;

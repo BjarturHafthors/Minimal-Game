@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour {
     private float timeOfLastEngineCool;
     public float engineCooldown;
     public Slider engineHeatSlider;
+    private int shieldHealth;
 
     // Use this for initialization
     void Start()
@@ -57,13 +58,12 @@ public class PlayerController : MonoBehaviour {
             shotBullet.GetComponent<BulletController>().strength = difficulty;
             timeOfLastShot = Time.time;
 
-            engineHeat += 1;
+            engineHeat += Mathf.Abs(4-difficulty)+1;
             engineHeatSlider.value = engineHeat;
 
             if (engineHeat >= maxEngineHeat)
             {
                 engineOverheated = true;
-                engineHeat += 5;
             }
         } 
         else if (engineHeat > 0 && timeOfLastEngineCool + engineCooldown <= Time.time && timeOfLastShot + shootCooldown <= Time.time)
@@ -75,7 +75,8 @@ public class PlayerController : MonoBehaviour {
             }
             else
             {
-                engineHeat--;
+                //engineHeat -= Mathf.Abs(4 - difficulty) + 1;
+                engineHeat -= 4;
                 engineHeatSlider.value = engineHeat;
             }
         }
@@ -121,12 +122,16 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-		if (other.tag == "Bullet" && (other.GetComponent<BulletController> ().getParent () != gameObject || Time.time > other.gameObject.GetComponent<BulletController> ().getTimeOfSpawn () + 0.1f)) 
+		if (other.tag == "Bullet" && other.GetComponent<BulletController> ().getParent () != gameObject) 
 		{
 			if (hasShield) 
 			{
-				hasShield = false;
-				transform.Find ("Shield").GetComponent<SpriteRenderer> ().enabled = false;
+                shieldHealth--;
+                if (shieldHealth == 0)
+                {
+                    hasShield = false;
+                    transform.Find("Shield").GetComponent<SpriteRenderer>().enabled = false;
+                }
 			} 
 			else 
 			{
@@ -136,6 +141,7 @@ public class PlayerController : MonoBehaviour {
 		else if (other.tag == "ShieldProjectile") 
 		{
 			hasShield = true;
+            shieldHealth = other.GetComponent<BulletController>().getStrength();
 			transform.Find ("Shield").GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, .75f);
 			transform.Find ("Shield").GetComponent<SpriteRenderer> ().enabled = true;
 		} 

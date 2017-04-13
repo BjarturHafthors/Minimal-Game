@@ -104,14 +104,12 @@ public class BulletController : MonoBehaviour
             {
                 Vector2 direction = nearbyEnemies[0].transform.position - transform.position;
 		        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-		            
-                if (Vector3.Distance(nearbyEnemies[0].gameObject.transform.position, transform.position) <= 0.5)
+
+                float distanceToNearest = Vector3.Distance(nearbyEnemies[0].gameObject.transform.position, transform.position);
+
+                if (distanceToNearest > 1)
                 {
-                	transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), homeSpeed);
-            	}
-            	else 
-            	{
-            		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), homeSpeed*2);
+            		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), homeSpeed*(homeRadius - distanceToNearest)*1.5f);
             	}
 
             	return;

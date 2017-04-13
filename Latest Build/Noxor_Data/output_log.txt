@@ -17,9 +17,20 @@ Platform assembly: F:\School\Minimal-Game\Latest Build\Noxor_Data\Managed\UnityE
 Loading F:\School\Minimal-Game\Latest Build\Noxor_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: F:\School\Minimal-Game\Latest Build\Noxor_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
 Loading F:\School\Minimal-Game\Latest Build\Noxor_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
-- Completed reload, in  0.119 seconds
+- Completed reload, in  0.139 seconds
 Platform assembly: F:\School\Minimal-Game\Latest Build\Noxor_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: F:\School\Minimal-Game\Latest Build\Noxor_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 2.479821 ms
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.191164 ms
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 336.
+Total: 0.547230 ms (FindLiveObjects: 0.048654 ms CreateObjectMapping: 0.055568 ms MarkObjects: 0.396402 ms  DeleteObjects: 0.045581 ms)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: ca4 -> priority: 1 
+  Thread -> id: 1918 -> priority: 1 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy5Controller : EnemyController
 {
     public GameObject shieldProjectile;
+    public int shieldHealth;
 
     // Use this for initialization
     public override void Start()

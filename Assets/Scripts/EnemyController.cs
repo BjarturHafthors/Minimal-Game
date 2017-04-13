@@ -214,25 +214,12 @@ public class EnemyController : MonoBehaviour {
                 health--;
             }
         }
-        else if (other.tag == "ShieldProjectile" && (other.GetComponent<BulletController>().getParent() != gameObject || Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() + 0.1f))
+        else if (!hasShield && other.tag == "ShieldProjectile" && (other.GetComponent<BulletController>().getParent() != gameObject || Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() + 0.1f))
         {
             hasShield = true;
-            if(other.GetComponent<BulletController>().getParent().GetComponent<SpriteRenderer>().sprite.name == "Enemy5Green")
-            {
-                shieldHealth = 1;
-            }
-            else if(other.GetComponent<BulletController>().getParent().GetComponent<SpriteRenderer>().sprite.name == "Enemy5Blue")
-            {
-                shieldHealth = 2;
-            }
-            else if(other.GetComponent<BulletController>().getParent().GetComponent<SpriteRenderer>().sprite.name == "Enemy5Orange")
-            {
-                shieldHealth = 3;
-            }
-            else if(other.GetComponent<BulletController>().getParent().GetComponent<SpriteRenderer>().sprite.name == "Enemy5Dark")
-            {
-                shieldHealth = 4;
-            }
+
+            shieldHealth = other.GetComponent<BulletController>().getStrength();
+
             transform.Find("Shield").GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
             transform.Find("Shield").GetComponent<SpriteRenderer>().enabled = true;
         }

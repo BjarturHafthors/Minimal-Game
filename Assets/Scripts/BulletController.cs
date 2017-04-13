@@ -21,6 +21,12 @@ public class BulletController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        EnemyController parentController = parent.gameObject.GetComponent<EnemyController>();
+        if (parentController is Enemy5Controller)
+        {
+            strength = parentController.getStrength();
+        }
+
         timeOfSpawn = Time.time;
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         homeRadius = 3;
@@ -35,7 +41,7 @@ public class BulletController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (parent.tag == "Player" && timeOfSpawn < Time.time - timeBeforeHome)
+        if (parent != null && parent.tag == "Player" && timeOfSpawn < Time.time - timeBeforeHome)
         {
             home();
         }
@@ -64,19 +70,23 @@ public class BulletController : MonoBehaviour
 
         if (transform.position.x > stageDimensions.x)
         {
-            transform.position = new Vector3(-stageDimensions.x, transform.position.y, transform.position.z);
+            Destroy(gameObject);
+            //transform.position = new Vector3(-stageDimensions.x, transform.position.y, transform.position.z);
         }
         else if (transform.position.x < -stageDimensions.x)
         {
+            Destroy(gameObject);
             transform.position = new Vector3(stageDimensions.x, transform.position.y, transform.position.z);
         }
 
         if (transform.position.y > stageDimensions.y)
         {
+            Destroy(gameObject);
             transform.position = new Vector3(transform.position.x, -stageDimensions.y, transform.position.z);
         }
         else if (transform.position.y < -stageDimensions.y)
         {
+            Destroy(gameObject);
             transform.position = new Vector3(transform.position.x, stageDimensions.y, transform.position.z);
         }
     }
@@ -94,6 +104,11 @@ public class BulletController : MonoBehaviour
     public GameObject getParent()
     {
         return parent;
+    }
+
+    public int getStrength()
+    {
+        return strength;
     }
 
     public void home()

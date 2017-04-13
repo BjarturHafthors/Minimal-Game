@@ -150,6 +150,7 @@ MonoBehaviour:
   hasPickedUpOrb: 0
   shieldProjectile: {fileID: 1080585712258034, guid: 86f69a2d7e467924fa300028873ef0a5,
     type: 2}
+  shieldHealth: 1
 --- !u!212 &212278791897956012
 SpriteRenderer:
   m_ObjectHideFlags: 1

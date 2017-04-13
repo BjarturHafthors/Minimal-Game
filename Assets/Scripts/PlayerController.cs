@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
     private int difficulty;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         timeOfLastShot = Time.time - shootCooldown;
         bulletSpawnOffset = 1;
@@ -32,9 +32,9 @@ public class PlayerController : MonoBehaviour {
     void Update()
     {
         // Rotate
-        if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
+        if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && !(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
             transform.Rotate(new Vector3(0, 0, 1) * -RotateSpeed * Time.deltaTime);
-        else if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        else if (!(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
             transform.Rotate(new Vector3(0, 0, 1) * RotateSpeed * Time.deltaTime);
 
         // Shoot

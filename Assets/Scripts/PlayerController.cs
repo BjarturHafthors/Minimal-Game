@@ -172,6 +172,7 @@ public class PlayerController : MonoBehaviour {
 
         if (health - spawnedOrb.GetComponent<OrbController>().value <= 0)
         {
+            Cursor.visible = true;
             SceneManager.LoadScene(2);
         }
         else

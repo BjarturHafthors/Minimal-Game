@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour {
         orbs = new List<GameObject>();
         enemies = new List<GameObject>();
         initialCooldown = spawnCooldown;
+        Cursor.visible = false;
     }
 	
 	// Update is called once per frame

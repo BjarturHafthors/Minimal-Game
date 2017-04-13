@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
@@ -16,15 +17,26 @@ public class PlayerController : MonoBehaviour {
     private bool hasShield;
     private SpriteRenderer spriteRenderer;
     private int difficulty;
+    private bool engineOverheated;
+    private int engineHeat;
+    public int maxEngineHeat;
+    private float timeOfLastEngineCool;
+    public float engineCooldown;
+    public Slider engineHeatSlider;
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         timeOfLastShot = Time.time - shootCooldown;
         bulletSpawnOffset = 1;
         hasShield = false;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         difficulty = 1;
+        engineOverheated = false;
+        engineHeat = 0;
+        engineHeatSlider.value = 0;
+        engineHeatSlider.maxValue = maxEngineHeat;
     }
 
     // Update is called once per frame
@@ -37,13 +49,40 @@ public class PlayerController : MonoBehaviour {
         else if (!(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
             transform.Rotate(new Vector3(0, 0, 1) * RotateSpeed * Time.deltaTime);
 
-        // Shoot
-        if (Input.GetKey(KeyCode.Space) && timeOfLastShot + shootCooldown <= Time.time)
+        // Shoot & EngineHeat
+        if (!engineOverheated && Input.GetKey(KeyCode.Space) && timeOfLastShot + shootCooldown <= Time.time)
         {
             GameObject shotBullet = Instantiate(bullet, transform.position + transform.forward*bulletSpawnOffset, transform.rotation);
             shotBullet.GetComponent<BulletController>().setParent(gameObject);
             shotBullet.GetComponent<BulletController>().strength = difficulty;
             timeOfLastShot = Time.time;
+
+            engineHeat += 1;
+            engineHeatSlider.value = engineHeat;
+
+            if (engineHeat >= maxEngineHeat)
+            {
+                engineOverheated = true;
+                engineHeat += 5;
+            }
+        } 
+        else if (engineHeat > 0 && timeOfLastEngineCool + engineCooldown <= Time.time && timeOfLastShot + shootCooldown <= Time.time)
+        {
+            timeOfLastEngineCool = Time.time;
+            if (engineOverheated && engineHeat < maxEngineHeat)
+            {
+                engineOverheated = false;
+            }
+            else
+            {
+                engineHeat--;
+                engineHeatSlider.value = engineHeat;
+            }
+        }
+        else if (engineHeat < 0)
+        {
+            engineHeat = 0;
+            engineHeatSlider.value = engineHeat;
         }
 
         checkIfOffscreen();

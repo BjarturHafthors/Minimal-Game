@@ -68,26 +68,9 @@ public class BulletController : MonoBehaviour
     {
         Vector3 stageDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
 
-        if (transform.position.x > stageDimensions.x)
+        if (transform.position.x > stageDimensions.x || transform.position.x < -stageDimensions.x || transform.position.y > stageDimensions.y || transform.position.y < -stageDimensions.y)
         {
             Destroy(gameObject);
-            //transform.position = new Vector3(-stageDimensions.x, transform.position.y, transform.position.z);
-        }
-        else if (transform.position.x < -stageDimensions.x)
-        {
-            Destroy(gameObject);
-            transform.position = new Vector3(stageDimensions.x, transform.position.y, transform.position.z);
-        }
-
-        if (transform.position.y > stageDimensions.y)
-        {
-            Destroy(gameObject);
-            transform.position = new Vector3(transform.position.x, -stageDimensions.y, transform.position.z);
-        }
-        else if (transform.position.y < -stageDimensions.y)
-        {
-            Destroy(gameObject);
-            transform.position = new Vector3(transform.position.x, stageDimensions.y, transform.position.z);
         }
     }
 

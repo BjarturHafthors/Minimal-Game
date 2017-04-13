@@ -877,6 +877,11 @@ Prefab:
       propertyPath: health
       value: 55
       objectReference: {fileID: 0}
+    - target: {fileID: 114419390119431528, guid: e21c99b2a347faa4cbd03d0b340eb3e8,
+        type: 2}
+      propertyPath: shootCooldown
+      value: 0.15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e21c99b2a347faa4cbd03d0b340eb3e8, type: 2}
   m_IsPrefabParent: 0

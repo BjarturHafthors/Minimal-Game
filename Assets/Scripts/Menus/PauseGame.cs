@@ -29,6 +29,8 @@ public class PauseGame : MonoBehaviour {
 
 	public void PauseResume() {
 		if (canvas.gameObject.activeInHierarchy == false) {
+			 Cursor.visible = true;
+
 			if (pauseMenu.gameObject.activeInHierarchy == false) {
 				pauseMenu.gameObject.SetActive (true);
 				controlsMenu.gameObject.SetActive (false);
@@ -41,6 +43,7 @@ public class PauseGame : MonoBehaviour {
 			canvas.gameObject.SetActive (false);
 			Time.timeScale = 1;
 			player.GetComponent<PlayerController> ().enabled = true;
+			 Cursor.visible = false;
 		}
 	}
 

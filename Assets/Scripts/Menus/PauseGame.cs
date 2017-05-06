@@ -54,7 +54,7 @@ public class PauseGame : MonoBehaviour {
 	}
 
 	public void Mute() {
-		//BackgroundMusic.Instance.Mute (); 
+		BackgroundMusic.Instance.Mute (); 
 	}
 
 	public void Controls(bool Open) {

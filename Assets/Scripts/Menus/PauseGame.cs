@@ -27,24 +27,34 @@ public class PauseGame : MonoBehaviour {
 		}
 	}
 
-	public void PauseResume() {
-		if (canvas.gameObject.activeInHierarchy == false) {
+	public void PauseResume() 
+	{
+		if (canvas.gameObject.activeInHierarchy == false) 
+		{
 			 Cursor.visible = true;
 
-			if (pauseMenu.gameObject.activeInHierarchy == false) {
-				pauseMenu.gameObject.SetActive (true);
-				controlsMenu.gameObject.SetActive (false);
+			if (pauseMenu.gameObject.activeInHierarchy == false) 
+			{
+				ExitControls();
 			}
 
 			canvas.gameObject.SetActive (true);
 			Time.timeScale = 0;
 			player.GetComponent<PlayerController> ().enabled = false;
-		} else {
+		} 
+		else 
+		{
 			canvas.gameObject.SetActive (false);
 			Time.timeScale = 1;
 			player.GetComponent<PlayerController> ().enabled = true;
 			 Cursor.visible = false;
 		}
+	}
+
+	public void ExitControls()
+	{
+		pauseMenu.gameObject.SetActive (true);
+		controlsMenu.gameObject.SetActive (false);
 	}
 
 	public void Quit() {
@@ -54,7 +64,7 @@ public class PauseGame : MonoBehaviour {
 	}
 
 	public void Mute() {
-		//BackgroundMusic.Instance.Mute (); 
+		BackgroundMusic.Instance.Mute (); 
 	}
 
 	public void Controls(bool Open) {

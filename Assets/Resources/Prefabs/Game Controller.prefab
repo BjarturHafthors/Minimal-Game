@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114155347459850280}
   m_Layer: 0
   m_Name: Game Controller
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,12 +51,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e824feac04f6e4d95457a79a4f4abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCooldown: 5
+  spawnCooldown: 3
   player: {fileID: 0}
+  pc: {fileID: 0}
   orbs: []
   enemies: []
   spawnAreaLength: 2
-  level1SpawnRate: 0
+  level1SpawnRate: 50
   level2SpawnRate: 0
   level3SpawnRate: 0
   level4SpawnRate: 0
+  enemiesWithShield: 0

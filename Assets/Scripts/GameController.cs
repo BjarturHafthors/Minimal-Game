@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
     private float initialCooldown;
     private float timeOfLastSpawn;
     public GameObject player;
+	public PlayerController pc;
     public List<GameObject> orbs;
     public List<GameObject> enemies;
     public float spawnAreaLength;
@@ -15,6 +16,10 @@ public class GameController : MonoBehaviour {
     public int level2SpawnRate;
     public int level3SpawnRate;
     public int level4SpawnRate;
+
+	public int enemiesWithShield;
+	public int hitScore;
+	private IEnumerator coroutine;
 
     // Use this for initialization
     void Start ()
@@ -24,6 +29,11 @@ public class GameController : MonoBehaviour {
         enemies = new List<GameObject>();
         initialCooldown = spawnCooldown;
         Cursor.visible = false;
+		pc = player.GetComponent<PlayerController>();
+		enemiesWithShield = 0;
+
+		coroutine = EvaluateScore(10.0f);
+        StartCoroutine(coroutine);
     }
 	
 	// Update is called once per frame
@@ -35,6 +45,38 @@ public class GameController : MonoBehaviour {
             timeOfLastSpawn = Time.time;
         }
     }
+
+	IEnumerator EvaluateScore(float seconds) {
+		while(true) {
+			// enemies killed / enemies alife + enemies killed???
+			// stolen health
+
+			// score = (pHealth-lastHealth) + enemiesKilled*type - enemiesOnScreen*type - engineOverheats - enemiesWithShield
+
+			int lastHealth = pc.health;
+
+			yield return new WaitForSeconds(seconds);
+
+			// 100 + change in health
+			float score = 100.0f + ((float)((float)(pc.health-lastHealth))/lastHealth * 100.0f);
+
+			Debug.Log(score);
+			score += (float)hitScore * 2.0f;
+			Debug.Log("hit score: " + score);
+			//number of enemies that recived shield in the given time
+			score -= (float)enemiesWithShield * 4.0f;
+			Debug.Log("shield score: " + score);
+			score -= (float)pc.engineOverheatsCounter * 20.0f;
+			Debug.Log("overheat score: " + score);
+			
+			hitScore = 0;
+			pc.engineOverheatsCounter = 0;
+			enemiesWithShield = 0;
+
+			//Debug.Log(Time.realtimeSinceStartup);
+			Debug.Log(score);
+		}
+	}
 
     void spawnEnemies()
     {
@@ -66,35 +108,44 @@ public class GameController : MonoBehaviour {
             spawnLocation = new Vector3(Random.Range(-spawnArea.x, spawnArea.x), Random.Range(stageDimensions.y, spawnArea.y), 0);
         }
 
-        int enemyType = Random.Range(1, 6);        
+        int enemyType = Random.Range(1, 6);
         int enemyLevel = Random.Range(0, getTotalSpawnRate());
 
         string path =  "Prefabs/Enemy" + enemyType;
+		int difficulty = 0;
 
         if (enemyLevel <= level1SpawnRate)
         {
             path += "Green";
+			difficulty = 1;
+
         }
         else if (enemyLevel <= level2SpawnRate+level1SpawnRate)
         {
             path += "Blue";
+			difficulty = 2;
         }
         else if (enemyLevel <= level3SpawnRate+level2SpawnRate+level1SpawnRate)
         {
             path += "Orange";
+			difficulty = 3;
         }
         else
         {
             path += "Dark";
+			difficulty = 4;
         }
 
         updateSpawnRates();
 
         GameObject spawnedEnemy = Instantiate(Resources.Load<GameObject>(path), spawnLocation, Quaternion.identity);
+		spawnedEnemy.GetComponent<EnemyController>().color = difficulty;
+
         spawnedEnemy.GetComponent<EnemyController>().player = player;
         spawnedEnemy.GetComponent<EnemyController>().setGame(gameObject);
         int playerDifficulty = player.GetComponent<PlayerController>().getDifficulty();
         enemies.Add(spawnedEnemy);
+
     }
 
     public int getTotalSpawnRate()

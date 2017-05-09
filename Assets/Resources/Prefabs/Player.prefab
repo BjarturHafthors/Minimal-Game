@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4297352061451948}
   - component: {fileID: 212885672242841522}
   - component: {fileID: 114498932827806398}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 50144954333980188}
   - component: {fileID: 114419390119431528}
   - component: {fileID: 60345563054346210}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -125,14 +125,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2b18b3368f80024db331eb8b256961b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.5
+  speed: 6
   RotateSpeed: 175
-  health: 15
-  shootCooldown: 0.1
+  health: 50
+  shootCooldown: 0.15
   bullet: {fileID: 1496483112240164, guid: 287463432e0eb644da9f2ae5dc0cb5c3, type: 2}
   game: {fileID: 0}
-  maxEngineHeat: 15
-  engineCooldown: 0.2
+  engineOverheatsCounter: 0
+  maxEngineHeat: 80
+  engineCooldown: 0.5
   engineHeatSlider: {fileID: 0}
 --- !u!114 &114498932827806398
 MonoBehaviour:
@@ -174,7 +175,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1338097493
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 01b951e8782479841930d7fed1993ca2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -209,7 +210,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -363297433
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 06d2fa9c8849a734aba5887acaa16c7a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

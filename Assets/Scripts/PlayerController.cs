@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb2d;
     public float speed;
+
+	private float maxVelocity = 3.0f;
     public float RotateSpeed;
     public int health;
     private float timeOfLastShot;
@@ -19,11 +21,13 @@ public class PlayerController : MonoBehaviour {
     private int difficulty;
     private bool engineOverheated;
     private int engineHeat;
+	public int engineOverheatsCounter;
     public int maxEngineHeat;
     private float timeOfLastEngineCool;
     public float engineCooldown;
     public Slider engineHeatSlider;
     private int shieldHealth;
+	private Vector2 velocity = Vector2.zero;
 
     // Use this for initialization
     void Start()
@@ -38,6 +42,7 @@ public class PlayerController : MonoBehaviour {
         engineHeat = 0;
         engineHeatSlider.value = 0;
         engineHeatSlider.maxValue = maxEngineHeat;
+		engineOverheatsCounter = 0;
     }
 
     // Update is called once per frame
@@ -64,6 +69,7 @@ public class PlayerController : MonoBehaviour {
             if (engineHeat >= maxEngineHeat)
             {
                 engineOverheated = true;
+				engineOverheatsCounter++;
             }
         } 
         else if (engineHeat > 0 && timeOfLastEngineCool + engineCooldown <= Time.time && timeOfLastShot + shootCooldown <= Time.time)
@@ -87,6 +93,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         checkIfOffscreen();
+
     }
 
     // Update is called once per frame right before physics happen
@@ -95,6 +102,7 @@ public class PlayerController : MonoBehaviour {
         float move = Input.GetAxis("Vertical");
 
         rb2d.velocity = new Vector2(transform.up.x, transform.up.y) * speed * move;
+		
     }
 
     void checkIfOffscreen()
@@ -205,4 +213,5 @@ public class PlayerController : MonoBehaviour {
             this.difficulty = 4;
         }
     }
+
 }

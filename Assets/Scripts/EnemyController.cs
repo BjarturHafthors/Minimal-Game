@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour {
 
     public float speed;
+
+	// 1 = green, 2 = blue, 3 = orange, 4 = dark
+	public int color;
     public GameObject player;
     private Rigidbody2D rb2d;
     protected float timeOfLastShot;
@@ -19,6 +22,7 @@ public class EnemyController : MonoBehaviour {
     private int shieldHealth;
     public int strength;
     public bool hasPickedUpOrb;
+	public GameController gc;
 
     // Use this for initialization
     public virtual void Start() {
@@ -29,6 +33,7 @@ public class EnemyController : MonoBehaviour {
         hasShield = false;
         shieldHealth = 0;
         hasPickedUpOrb = false;
+		gc = GameObject.FindWithTag("GameController").GetComponent<GameController>();
     }
 
     // Update is called once per frame
@@ -206,12 +211,15 @@ public class EnemyController : MonoBehaviour {
             }
             else if (health - 1 <= 0)
             {
+				//Debug.Log(this.color);
                 spawnOrb();
                 Destroy(gameObject);
+				gc.hitScore++;
             }
             else
             {
                 health--;
+				gc.hitScore++;
             }
         }
         else if (!hasShield && other.tag == "ShieldProjectile" && (other.GetComponent<BulletController>().getParent() != gameObject || Time.time > other.gameObject.GetComponent<BulletController>().getTimeOfSpawn() + 0.1f))
@@ -222,6 +230,8 @@ public class EnemyController : MonoBehaviour {
 
             transform.Find("Shield").GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
             transform.Find("Shield").GetComponent<SpriteRenderer>().enabled = true;
+
+			gc.enemiesWithShield++;
         }
     }
 

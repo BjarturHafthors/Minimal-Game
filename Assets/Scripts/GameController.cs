@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour {
 	public int enemiesWithShield;
 	public int hitScore;
 	private IEnumerator coroutine;
+	private float evalutationTime = 10.0f;
+	private float evaluationScore = 100.0f;
 
     // Use this for initialization
     void Start ()
@@ -32,12 +34,12 @@ public class GameController : MonoBehaviour {
 		pc = player.GetComponent<PlayerController>();
 		enemiesWithShield = 0;
 
-		coroutine = EvaluateScore(10.0f);
+		coroutine = EvaluateScore(evalutationTime);
         StartCoroutine(coroutine);
     }
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
         if (Time.time >= spawnCooldown + timeOfLastSpawn)
         {
@@ -48,33 +50,44 @@ public class GameController : MonoBehaviour {
 
 	IEnumerator EvaluateScore(float seconds) {
 		while(true) {
-			// enemies killed / enemies alife + enemies killed???
-			// stolen health
-
-			// score = (pHealth-lastHealth) + enemiesKilled*type - enemiesOnScreen*type - engineOverheats - enemiesWithShield
-
 			int lastHealth = pc.health;
+			float lastCooldown = spawnCooldown;
 
 			yield return new WaitForSeconds(seconds);
 
 			// 100 + change in health
-			float score = 100.0f + ((float)((float)(pc.health-lastHealth))/lastHealth * 100.0f);
+			float healthChange = (float)(pc.health-lastHealth)/lastHealth* 100.0f;
+			Debug.Log("health change: " + healthChange);
+			evaluationScore = 100.0f + (healthChange/2);
 
-			Debug.Log(score);
-			score += (float)hitScore * 2.0f;
-			Debug.Log("hit score: " + score);
+			Debug.Log("health score: " +evaluationScore);
+			evaluationScore += (float)hitScore;
+			Debug.Log("hit score: " + evaluationScore);
 			//number of enemies that recived shield in the given time
-			score -= (float)enemiesWithShield * 4.0f;
-			Debug.Log("shield score: " + score);
-			score -= (float)pc.engineOverheatsCounter * 20.0f;
-			Debug.Log("overheat score: " + score);
+			evaluationScore -= (float)enemiesWithShield * 2.0f;
+			Debug.Log("shield score: " + evaluationScore);
+			evaluationScore -= (float)pc.engineOverheatsCounter * 10.0f;
+			Debug.Log("overheat score: " + evaluationScore);
 			
 			hitScore = 0;
 			pc.engineOverheatsCounter = 0;
 			enemiesWithShield = 0;
 
-			//Debug.Log(Time.realtimeSinceStartup);
-			Debug.Log(score);
+			if (evaluationScore > 140.0f) {
+				evaluationScore = 140.0f;
+			} else if (evaluationScore < 75.0f) {
+				evaluationScore = 75.0f;
+			}
+
+			if (spawnCooldown > 5.0f) {
+				spawnCooldown = 5.0f;
+			} else if (evaluationScore < 103.0f && evaluationScore > 97.0f && spawnCooldown > 3.0f) {
+				spawnCooldown = initialCooldown;
+			} else {
+				Debug.Log("first spawn cooldown: " + spawnCooldown);
+				spawnCooldown = spawnCooldown / (evaluationScore/100.0f);
+				Debug.Log("spawn cooldown: " + spawnCooldown);
+			}
 		}
 	}
 
@@ -199,7 +212,6 @@ public class GameController : MonoBehaviour {
             {
                 spawnCooldown -= 0.02f;
             }
-            
         }
 
         if (playerDifficulty == 1 && level2SpawnRate >= 50)

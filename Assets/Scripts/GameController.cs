@@ -58,15 +58,15 @@ public class GameController : MonoBehaviour {
 			// 100 + change in health
 			float healthChange = (float)(pc.health-lastHealth)/lastHealth* 100.0f;
 			Debug.Log("health change: " + healthChange);
-			evaluationScore = 100.0f + (healthChange/2);
+			evaluationScore = 100.0f + (healthChange/3);
 
 			Debug.Log("health score: " +evaluationScore);
-			evaluationScore += (float)hitScore;
+			evaluationScore += (float)hitScore * 0.5f;
 			Debug.Log("hit score: " + evaluationScore);
 			//number of enemies that recived shield in the given time
-			evaluationScore -= (float)enemiesWithShield * 2.0f;
+			evaluationScore -= (float)enemiesWithShield;// * 2.0f;
 			Debug.Log("shield score: " + evaluationScore);
-			evaluationScore -= (float)pc.engineOverheatsCounter * 10.0f;
+			evaluationScore -= (float)pc.engineOverheatsCounter * 5.0f;
 			Debug.Log("overheat score: " + evaluationScore);
 			
 			hitScore = 0;
@@ -79,8 +79,8 @@ public class GameController : MonoBehaviour {
 				evaluationScore = 75.0f;
 			}
 
-			if (spawnCooldown > 5.0f) {
-				spawnCooldown = 5.0f;
+			if (spawnCooldown > 6.0f) {
+				spawnCooldown = 6.0f;
 			} else if (evaluationScore < 103.0f && evaluationScore > 97.0f && spawnCooldown > 3.0f) {
 				spawnCooldown = initialCooldown;
 			} else {

@@ -175,6 +175,7 @@ public class EnemyController : MonoBehaviour {
         else
         {
             Destroy(gameObject);
+			gc.enemiesAlive--;
         }
     }
 
@@ -211,10 +212,10 @@ public class EnemyController : MonoBehaviour {
             }
             else if (health - 1 <= 0)
             {
-				//Debug.Log(this.color);
                 spawnOrb();
                 Destroy(gameObject);
 				gc.hitScore++;
+				gc.enemiesAlive--;
             }
             else
             {

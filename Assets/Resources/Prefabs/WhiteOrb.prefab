@@ -72,7 +72,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1359197753296532}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5496156, y: -3.564115, z: 0}
+  m_LocalPosition: {x: 5.67, y: -3.564115, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children:
   - {fileID: 224376394069164056}
@@ -161,7 +161,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100
+  m_Text: 50
 --- !u!114 &114944529175547348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d56b8273be40b4cb1653a861b6d55f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 100
+  value: 50
   hoverHeight: 0.05
   hoverSpeed: 0.2
 --- !u!114 &114956416124598764

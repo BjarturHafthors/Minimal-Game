@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour {
 	private IEnumerator coroutine;
 	private float evalutationTime = 10.0f;
 	private float evaluationScore = 100.0f;
+	public int enemiesAlive;
 
     // Use this for initialization
     void Start ()
@@ -33,9 +34,11 @@ public class GameController : MonoBehaviour {
         Cursor.visible = false;
 		pc = player.GetComponent<PlayerController>();
 		enemiesWithShield = 0;
+		enemiesAlive = 0;
 
 		coroutine = EvaluateScore(evalutationTime);
         StartCoroutine(coroutine);
+
     }
 	
 	// Update is called once per frame
@@ -57,34 +60,33 @@ public class GameController : MonoBehaviour {
 
 			// 100 + change in health
 			float healthChange = (float)(pc.health-lastHealth)/lastHealth* 100.0f;
-			Debug.Log("health change: " + healthChange);
+			//Debug.Log("health change: " + healthChange);
 			evaluationScore = 100.0f + (healthChange/3);
 
-			Debug.Log("health score: " +evaluationScore);
-			evaluationScore += (float)hitScore * 0.5f;
-			Debug.Log("hit score: " + evaluationScore);
+			//Debug.Log("health score: " +evaluationScore);
+			evaluationScore += (float)hitScore;
+			//Debug.Log("hit score: " + evaluationScore);
 			//number of enemies that recived shield in the given time
-			evaluationScore -= (float)enemiesWithShield;// * 2.0f;
-			Debug.Log("shield score: " + evaluationScore);
-			evaluationScore -= (float)pc.engineOverheatsCounter * 5.0f;
+			evaluationScore -= (float)enemiesWithShield * 2.0f;
+			//Debug.Log("shield score: " + evaluationScore);
+			evaluationScore -= (float)pc.engineOverheatsCounter * 10.0f;
 			Debug.Log("overheat score: " + evaluationScore);
 			
 			hitScore = 0;
 			pc.engineOverheatsCounter = 0;
 			enemiesWithShield = 0;
 
-			if (evaluationScore > 140.0f) {
-				evaluationScore = 140.0f;
-			} else if (evaluationScore < 75.0f) {
-				evaluationScore = 75.0f;
+			if (evaluationScore > 130.0f) {
+				evaluationScore = 130.0f;
+			} else if (evaluationScore < 70.0f) {
+				evaluationScore = 70.0f;
 			}
 
-			if (spawnCooldown > 6.0f) {
-				spawnCooldown = 6.0f;
-			} else if (evaluationScore < 103.0f && evaluationScore > 97.0f && spawnCooldown > 3.0f) {
+
+			if (evaluationScore < 102.0f && evaluationScore > 98.0f && spawnCooldown > initialCooldown) {
 				spawnCooldown = initialCooldown;
 			} else {
-				Debug.Log("first spawn cooldown: " + spawnCooldown);
+				//Debug.Log("first spawn cooldown: " + spawnCooldown);
 				spawnCooldown = spawnCooldown / (evaluationScore/100.0f);
 				Debug.Log("spawn cooldown: " + spawnCooldown);
 			}
@@ -93,6 +95,10 @@ public class GameController : MonoBehaviour {
 
     void spawnEnemies()
     {
+		if (enemiesAlive >= 8) {
+			return;
+		}
+
         Vector3 stageDimensions = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
 
         Vector3 spawnArea = new Vector3(stageDimensions.x + spawnAreaLength, stageDimensions.y + spawnAreaLength, 0);
@@ -159,6 +165,8 @@ public class GameController : MonoBehaviour {
         int playerDifficulty = player.GetComponent<PlayerController>().getDifficulty();
         enemies.Add(spawnedEnemy);
 
+		enemiesAlive++;
+
     }
 
     public int getTotalSpawnRate()
@@ -178,7 +186,7 @@ public class GameController : MonoBehaviour {
         {
             level2SpawnRate += 1;
             level3SpawnRate += 2;
-            spawnCooldown -= 0.01f;
+            //spawnCooldown -= 0.01f;
         }
         else if (playerDifficulty == 3)
         {
@@ -189,7 +197,7 @@ public class GameController : MonoBehaviour {
 
             level3SpawnRate += 1;
             level4SpawnRate += 2;
-            spawnCooldown -= 0.02f;
+            //spawnCooldown -= 0.02f;
         }
         else
         {
@@ -210,7 +218,7 @@ public class GameController : MonoBehaviour {
             level4SpawnRate += 4;
             if(spawnCooldown > 0.83f)
             {
-                spawnCooldown -= 0.02f;
+                //spawnCooldown -= 0.02f;
             }
         }
 

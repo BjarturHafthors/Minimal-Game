@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimeLabelText : MonoBehaviour {
+public class TimeLabelText : MonoBehaviour 
+{
     private float time;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
         time = GameObject.Find("SurvivalTime").GetComponent<SurivalTime>().getTimeSurvived();
 
         if (Mathf.Floor(time % 60) != 1)

@@ -6,16 +6,6 @@ public class HUDController : MonoBehaviour {
     public GameObject player;
     public SurivalTime time;
 
-	// Use this for initialization
-	void Start () {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-	}
-
     void OnGUI()
     {
         GUI.Label(new Rect(10, 10, 100, 50), "Health: " + player.GetComponent<PlayerController>().health);

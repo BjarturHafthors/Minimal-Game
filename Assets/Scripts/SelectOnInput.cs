@@ -4,10 +4,8 @@ using UnityEngine.EventSystems;
 
 public class SelectOnInput : MonoBehaviour
 {
-
     public EventSystem eventSystem;
     public GameObject selectedObject;
-
     private bool buttonSelected;
 
     // Update is called once per frame

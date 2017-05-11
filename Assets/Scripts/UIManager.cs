@@ -12,12 +12,6 @@ public class UIManager : MonoBehaviour
     public PlayerController player;
     public SurivalTime survival;
 
-
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         health.text = System.String.Format("{0:d}", "Health: " + player.health);

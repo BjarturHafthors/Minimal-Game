@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour {
-
+public class EnemyController : MonoBehaviour 
+{
     public float speed;
 
 	// 1 = green, 2 = blue, 3 = orange, 4 = dark
@@ -25,7 +25,8 @@ public class EnemyController : MonoBehaviour {
 	public GameController gc;
 
     // Use this for initialization
-    public virtual void Start() {
+    public virtual void Start() 
+    {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         timeOfLastShot = Time.time - shootCooldown;
         bulletSpawnOffset = .5f;
@@ -36,15 +37,15 @@ public class EnemyController : MonoBehaviour {
 		gc = GameObject.FindWithTag("GameController").GetComponent<GameController>();
     }
 
-    // Update is called once per frame
     public virtual void Update()
     {
-
+        
     }
 
     protected void moveTowardsPlayer()
     {
         Vector3 distance = player.transform.position - transform.position;
+
         if (Mathf.Sqrt(Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2)) > leastPossibleDistanceToPlayer)
         {
             rb2d.velocity = new Vector2(transform.up.x, transform.up.y) * speed;
@@ -59,6 +60,7 @@ public class EnemyController : MonoBehaviour {
     {
         GameObject nearestOrb = null;
         float nearest = 99999999;
+
         for (int i = game.GetComponent<GameController>().orbs.Count - 1; i >= 0; i--)
         {
             if (game.GetComponent<GameController>().orbs[i] != null)
@@ -114,6 +116,7 @@ public class EnemyController : MonoBehaviour {
     {
         GameObject nearestEnemy = null;
         float nearest = 99999999;
+
         for (int i = game.GetComponent<GameController>().enemies.Count - 1; i >= 0; i--)
         {
             if (game.GetComponent<GameController>().enemies[i] != null)
@@ -265,8 +268,7 @@ public class EnemyController : MonoBehaviour {
 
     private void spawnOrb()
     {
-        int lucky = Random.Range(0, 100);
-        
+        int lucky = Random.Range(0, 100);        
         int orbStrength;
 
         if (lucky == 0)
@@ -288,7 +290,6 @@ public class EnemyController : MonoBehaviour {
         }
 
         GameObject orb = getCorrectOrb(orbStrength);
-
         GameObject spawnedOrb = Instantiate(orb, transform.position, Quaternion.identity);
         game.GetComponent<GameController>().orbs.Add(spawnedOrb);
         game.GetComponent<GameController>().enemies.Remove(gameObject);

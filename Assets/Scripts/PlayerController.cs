@@ -4,12 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour 
+{
     private Rigidbody2D rb2d;
     public float speed;
-
-	private float maxVelocity = 3.0f;
-    public float RotateSpeed;
+	public float RotateSpeed;
     public int health;
     private float timeOfLastShot;
     public float shootCooldown;
@@ -27,8 +26,7 @@ public class PlayerController : MonoBehaviour {
     public float engineCooldown;
     public Slider engineHeatSlider;
     private int shieldHealth;
-	private Vector2 velocity = Vector2.zero;
-
+	
     // Use this for initialization
     void Start()
     {
@@ -46,14 +44,17 @@ public class PlayerController : MonoBehaviour {
     }
 
     // Update is called once per frame
-
     void Update()
     {
         // Rotate
         if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && !(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
+        {
             transform.Rotate(new Vector3(0, 0, 1) * -RotateSpeed * Time.deltaTime);
+        }
         else if (!(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
+        {
             transform.Rotate(new Vector3(0, 0, 1) * RotateSpeed * Time.deltaTime);
+        }
 
         // Shoot & EngineHeat
         if (!engineOverheated && Input.GetKey(KeyCode.Space) && timeOfLastShot + shootCooldown <= Time.time)
@@ -81,7 +82,6 @@ public class PlayerController : MonoBehaviour {
             }
             else
             {
-                //engineHeat -= Mathf.Abs(4 - difficulty) + 1;
                 engineHeat -= 4;
                 engineHeatSlider.value = engineHeat;
             }
@@ -93,16 +93,14 @@ public class PlayerController : MonoBehaviour {
         }
 
         checkIfOffscreen();
-
     }
 
     // Update is called once per frame right before physics happen
-    void FixedUpdate () {
+    void FixedUpdate () 
+    {
         //Store the current vertical input in the float moveVertical.
         float move = Input.GetAxis("Vertical");
-
-        rb2d.velocity = new Vector2(transform.up.x, transform.up.y) * speed * move;
-		
+        rb2d.velocity = new Vector2(transform.up.x, transform.up.y) * speed * move;	
     }
 
     void checkIfOffscreen()
@@ -213,5 +211,4 @@ public class PlayerController : MonoBehaviour {
             this.difficulty = 4;
         }
     }
-
 }

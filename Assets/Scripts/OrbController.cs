@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrbController : MonoBehaviour {
-
+public class OrbController : MonoBehaviour 
+{
     public int value;
     public float hoverHeight;
     public float hoverSpeed;
@@ -22,12 +22,6 @@ public class OrbController : MonoBehaviour {
         lastFLoatDirection = -1;
         timeOfSpawn = Time.time;
     }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-
-	}
 
     void FixedUpdate()
     {

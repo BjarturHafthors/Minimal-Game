@@ -2,30 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundMusic : MonoBehaviour {
-
+public class BackgroundMusic : MonoBehaviour 
+{
 	private static BackgroundMusic instance = null;
-	public static BackgroundMusic Instance {
-		get { return instance; }
+	public static BackgroundMusic Instance 
+	{
+		get 
+		{ 
+			return instance; 
+		}
 	}
 
-	AudioSource audio;
+	AudioSource audioSource;
 
-	void Awake() {
-		if (instance != null && instance != this) {
+	void Awake() 
+	{
+		if (instance != null && instance != this) 
+		{
 			Destroy(this.gameObject);
 			return;
-		} else {
+		} 
+		else 
+		{
 			instance = this;
 		}
+		
 		DontDestroyOnLoad(this.gameObject);
 	}
 
-	void Start() {
-		audio = GetComponent<AudioSource> ();
+	void Start() 
+	{
+		audioSource = GetComponent<AudioSource> ();
 	}
 
-	public void Mute() {
-		audio.mute = !audio.mute;
+	public void Mute() 
+	{
+		audioSource.mute = !audioSource.mute;
 	}
 }

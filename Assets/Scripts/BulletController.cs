@@ -6,7 +6,6 @@ public class BulletController : MonoBehaviour
 {
 
     private Rigidbody2D rb2d;
-
     public int strength;
     public float speed;
     public float despawnTime;
@@ -17,11 +16,11 @@ public class BulletController : MonoBehaviour
     private GameObject parent;
     private float angle;
 
-
     // Use this for initialization
     void Start()
     {
         EnemyController parentController = parent.gameObject.GetComponent<EnemyController>();
+
         if (parentController is Enemy5Controller)
         {
             strength = parentController.getStrength();
@@ -48,12 +47,11 @@ public class BulletController : MonoBehaviour
 
         checkIfOffscreen();
     }
+
     // Update is called once per frame
     void FixedUpdate()
     {
         rb2d.velocity = new Vector2(transform.up.x, transform.up.y) * speed;
-
-
     }
 
     void OnTriggerEnter2D(Collider2D other)

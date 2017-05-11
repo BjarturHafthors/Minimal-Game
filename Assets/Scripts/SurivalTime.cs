@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SurivalTime : MonoBehaviour {
-
+public class SurivalTime : MonoBehaviour 
+{
     private float timeSurvived;
     private int maximumHealthReached;
 
@@ -14,13 +14,15 @@ public class SurivalTime : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start () 
+    {
         timeSurvived = 0;
         maximumHealthReached = 15;
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
         timeSurvived += Time.deltaTime;
     }
 

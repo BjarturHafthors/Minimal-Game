@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseGame : MonoBehaviour {
+public class PauseGame : MonoBehaviour 
+{
 	[SerializeField]
 	public Transform canvas;
 	private Transform player;
@@ -12,13 +13,14 @@ public class PauseGame : MonoBehaviour {
 	[SerializeField]
 	public Transform controlsMenu;
 
-	void Start() {
+	void Start() 
+	{
 		player = GameObject.FindGameObjectWithTag("Player").transform;
-
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		if (Input.GetKeyDown (KeyCode.Escape)) 
 		{
 			PauseResume();
@@ -57,21 +59,25 @@ public class PauseGame : MonoBehaviour {
 		controlsMenu.gameObject.SetActive (false);
 	}
 
-	public void Quit() {
+	public void Quit() 
+	{
 		SceneManager.LoadScene (0);
-		//Application.Quit();
-		//UnityEditor.EditorApplication.isPlaying = false;
 	}
 
-	public void Mute() {
+	public void Mute() 
+	{
 		BackgroundMusic.Instance.Mute (); 
 	}
 
-	public void Controls(bool Open) {
-		if (Open) {
+	public void Controls(bool open) 
+	{
+		if (open) 
+		{
 			controlsMenu.gameObject.SetActive (true);
 			pauseMenu.gameObject.SetActive (false);
-		} else {
+		} 
+		else 
+		{
 			controlsMenu.gameObject.SetActive (false);
 			pauseMenu.gameObject.SetActive (true);
 		}

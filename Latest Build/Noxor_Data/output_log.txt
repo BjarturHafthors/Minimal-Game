@@ -4,7 +4,7 @@ Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
     Renderer: NVIDIA GeForce GTX 960M (ID=0x139b)
     Vendor:   NVIDIA
-    VRAM:     3072 MB
+    VRAM:     4065 MB
     Driver:   20.19.15.4474
 Begin MonoManager ReloadAssembly
 Platform assembly: D:\School\AGDD\Minimal Game\Latest Build\Noxor_Data\Managed\UnityEngine.dll (this message is harmless)
@@ -17,390 +17,262 @@ Platform assembly: D:\School\AGDD\Minimal Game\Latest Build\Noxor_Data\Managed\U
 Loading D:\School\AGDD\Minimal Game\Latest Build\Noxor_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: D:\School\AGDD\Minimal Game\Latest Build\Noxor_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
 Loading D:\School\AGDD\Minimal Game\Latest Build\Noxor_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
-- Completed reload, in  0.099 seconds
+- Completed reload, in  0.112 seconds
 Platform assembly: D:\School\AGDD\Minimal Game\Latest Build\Noxor_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: D:\School\AGDD\Minimal Game\Latest Build\Noxor_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.904987 ms
+UnloadTime: 2.057876 ms
 Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 5.618962 ms
+UnloadTime: 4.803950 ms
 
 Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 444.
-Total: 0.286419 ms (FindLiveObjects: 0.059259 ms CreateObjectMapping: 0.013037 ms MarkObjects: 0.202666 ms  DeleteObjects: 0.011061 ms)
+Total: 0.322370 ms (FindLiveObjects: 0.073481 ms CreateObjectMapping: 0.008296 ms MarkObjects: 0.225185 ms  DeleteObjects: 0.014617 ms)
 
-health change: 10
+overheat score: 106.3333
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health score: 105
+spawn cooldown: 2.821316
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-hit score: 109
+overheat score: 114.8974
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-shield score: 109
+spawn cooldown: 2.455509
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-overheat score: 109
+overheat score: 105.4493
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-first spawn cooldown: 3
+spawn cooldown: 2.328616
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-spawn cooldown: 2.752294
+overheat score: 108.7778
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health change: 3.636364
+spawn cooldown: 2.140709
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health score: 101.8182
+overheat score: 107.5641
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-hit score: 104.8182
+spawn cooldown: 1.990171
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-shield score: 104.8182
+overheat score: 104.9683
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-overheat score: 104.8182
+spawn cooldown: 1.895974
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-first spawn cooldown: 2.752294
+overheat score: 111.0284
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-spawn cooldown: 2.625779
+spawn cooldown: 1.707648
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health change: -5.263158
+overheat score: 105.9009
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health score: 97.36842
+spawn cooldown: 1.612496
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-hit score: 104.3684
+overheat score: 98.21638
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-shield score: 104.3684
+spawn cooldown: 1.64178
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-overheat score: 104.3684
+overheat score: 104.3333
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-first spawn cooldown: 2.625779
+spawn cooldown: 1.573591
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-spawn cooldown: 2.515875
+overheat score: 64.64102
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health change: 3.703704
+spawn cooldown: 2.247987
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health score: 101.8519
+overheat score: 85.47493
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-hit score: 107.8519
+spawn cooldown: 2.629995
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-shield score: 107.8519
+overheat score: 91.52542
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-overheat score: 107.8519
+spawn cooldown: 2.873513
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-first spawn cooldown: 2.515875
+overheat score: 117.2121
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-spawn cooldown: 2.332713
+spawn cooldown: 2.45155
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health change: 26.78572
+overheat score: 78.38889
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health score: 113.3929
+spawn cooldown: 3.12742
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-hit score: 118.3929
+overheat score: 103.3333
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-shield score: 114.3929
+spawn cooldown: 3.026535
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-overheat score: 114.3929
+overheat score: 101.2222
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-first spawn cooldown: 2.332713
+overheat score: 108.1894
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-spawn cooldown: 2.039212
+spawn cooldown: 2.772915
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health change: 8.450705
+overheat score: 114.6497
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health score: 104.2253
+spawn cooldown: 2.418597
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-hit score: 110.2253
+overheat score: 110.5845
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-shield score: 110.2253
+spawn cooldown: 2.187103
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-overheat score: 110.2253
+overheat score: 109.3056
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-first spawn cooldown: 2.039212
+spawn cooldown: 2.000907
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-spawn cooldown: 1.850039
+overheat score: 114.0922
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health change: 14.28571
+spawn cooldown: 1.753763
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health score: 107.1429
+overheat score: 100.731
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-hit score: 114.1429
+spawn cooldown: 1.741036
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-shield score: 112.1429
+overheat score: 111.4421
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-overheat score: 112.1429
+spawn cooldown: 1.562279
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-first spawn cooldown: 1.80004
+overheat score: 89.21293
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-spawn cooldown: 1.605131
+spawn cooldown: 1.75118
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health change: 11.36364
+overheat score: 100.1752
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health score: 105.6818
+spawn cooldown: 1.748118
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-hit score: 117.6818
+overheat score: 82.54697
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-shield score: 115.6818
+spawn cooldown: 2.117725
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-overheat score: 115.6818
+overheat score: 125.3237
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-first spawn cooldown: 1.545131
+spawn cooldown: 1.689804
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-spawn cooldown: 1.335673
+overheat score: 75.70948
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health change: 35.71429
+spawn cooldown: 2.231959
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-health score: 117.8571
+overheat score: 89.70056
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-hit score: 125.8571
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-shield score: 121.8571
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-overheat score: 121.8571
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-first spawn cooldown: 1.255673
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-spawn cooldown: 1.030447
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-health change: -9.774436
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-health score: 95.11279
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-hit score: 106.1128
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-shield score: 96.11279
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-overheat score: 96.11279
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-first spawn cooldown: 0.930447
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-spawn cooldown: 0.9680783
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-health change: -40.83333
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-health score: 79.58334
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-hit score: 100.5833
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-shield score: 92.58334
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-overheat score: 92.58334
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-first spawn cooldown: 0.8580784
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-spawn cooldown: 0.9268173
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-health change: 28.16901
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-health score: 114.0845
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-hit score: 127.0845
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-shield score: 111.0845
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-overheat score: 111.0845
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-first spawn cooldown: 0.7868174
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-spawn cooldown: 0.7083053
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-health change: 17.58242
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-health score: 108.7912
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-hit score: 122.7912
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-shield score: 86.79121
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-overheat score: 66.79121
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-first spawn cooldown: 0.3483054
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-spawn cooldown: 0.4644072
+spawn cooldown: 2.488233
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 4.514765 ms
+UnloadTime: 0.767604 ms
 
-Unloading 343 unused Assets to reduce memory usage. Loaded Objects now: 366.
-Total: 0.395851 ms (FindLiveObjects: 0.084148 ms CreateObjectMapping: 0.042271 ms MarkObjects: 0.205432 ms  DeleteObjects: 0.064000 ms)
+Unloading 321 unused Assets to reduce memory usage. Loaded Objects now: 366.
+Total: 0.708740 ms (FindLiveObjects: 0.086123 ms CreateObjectMapping: 0.018172 ms MarkObjects: 0.458666 ms  DeleteObjects: 0.145382 ms)
 
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 3a14 -> priority: 1 
-  Thread -> id: 2728 -> priority: 1 
+  Thread -> id: 1964 -> priority: 1 
+  Thread -> id: 3fc4 -> priority: 1 
